@@ -8,13 +8,13 @@
 #include "../lib/confreader/confreader.h"
 
 int main(int argc, char **argv) {
-    std::string conf_file("../master/master.conf");
+    const std::string conf_file("../master/master.conf");
     confreader conf(conf_file);
     logging log(conf.get(std::string("log")));
     log.write("starting master");
-    log.write("read config file " + conf_file.c_str());
-    std::string server_port = conf.get(std::string("port"));
+    log.write("read config file", conf_file);
+    const std::string server_port = conf.get(std::string("port"));
     tcpserver server(server_port);
-    log.write("listening on port " + server_port.c_str());
+    log.write("listening on port", server_port);
     return 0;
 }

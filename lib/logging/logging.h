@@ -7,6 +7,7 @@
 
 #include <fstream>
 #include <string>
+#include <time.h>
 
 class logging {
     std::ofstream logfile;
@@ -15,7 +16,7 @@ public:
 
     ~logging();
 
-    int write(char* message);
+    int write(const char* left, std::string right=std::string(""));
 };
 
 #endif //PROJECT_LOGGING_H
