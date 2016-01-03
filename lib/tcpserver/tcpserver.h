@@ -2,11 +2,12 @@
 #define PROJECT_HTTPSERVER_H
 
 #include <boost/asio.hpp>
+#include <boost/lexical_cast.hpp>
 #include <string>
 
 class tcpserver {
 public:
-    tcpserver(unsigned short port  = 9999);
+    tcpserver(std::string port = std::string("9999"));
     ~tcpserver();
     int accept();
 private:

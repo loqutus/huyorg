@@ -8,8 +8,7 @@
 #include "../lib/confreader/confreader.h"
 #include "../lib/logging/logging.h"
 #include "../lib/tcpserver/tcpserver.h"
-#include <boost/lexical_cast.hpp>
-
+#include <iostream>
 int main(int argc, char **argv);
 
 #endif //PROJECT_MAIN_H

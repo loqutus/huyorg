@@ -8,8 +8,13 @@
 #include "../lib/confreader/confreader.h"
 
 int main(int argc, char **argv) {
-    confreader conf(std::string("../../master/master.conf"));
-    logging(conf.get(std::string("log")));
-    tcpserver server(boost::lexical_cast<unsigned short>(conf.get(std::string("port"))));
+    std::string conf_file("../master/master.conf");
+    confreader conf(conf_file);
+    logging log(conf.get(std::string("log")));
+    log.write("starting master");
+    log.write("read config file " + conf_file.c_str());
+    std::string server_port = conf.get(std::string("port"));
+    tcpserver server(server_port);
+    log.write("listening on port " + server_port.c_str());
     return 0;
 }

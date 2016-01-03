@@ -15,7 +15,7 @@ public:
 
     ~logging();
 
-    int write(std::string message);
+    int write(char* message);
 };
 
 #endif //PROJECT_LOGGING_H

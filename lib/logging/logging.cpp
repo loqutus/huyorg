@@ -12,7 +12,7 @@ logging::~logging() {
     logfile.close();
 }
 
-int logging::write(std::string message) {
+int logging::write(char* message) {
     logfile << message << std::endl;
     return 0;
 }
