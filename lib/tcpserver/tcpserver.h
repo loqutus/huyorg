@@ -10,6 +10,8 @@ public:
     tcpserver(std::string port = std::string("9999"));
     ~tcpserver();
     int accept();
+    std::string read();
+    int write(std::string message);
 private:
     boost::asio::io_service io_service;
     boost::asio::ip::tcp::endpoint endpoint;

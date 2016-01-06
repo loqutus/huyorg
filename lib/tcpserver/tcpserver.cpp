@@ -2,8 +2,8 @@
 
 tcpserver::tcpserver(std::string port) : endpoint(
         boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v6(), boost::lexical_cast<unsigned short>(port))),
-                                            acceptor(boost::asio::ip::tcp::acceptor(io_service, endpoint)),
-                                            socket(boost::asio::ip::tcp::socket(io_service)) {
+                                         acceptor(boost::asio::ip::tcp::acceptor(io_service, endpoint)),
+                                         socket(boost::asio::ip::tcp::socket(io_service)) {
 
 }
 
@@ -13,5 +13,14 @@ tcpserver::~tcpserver() {
 
 int tcpserver::accept() {
     acceptor.accept(socket);
+    return 0;
+}
+
+std::string tcpserver::read() {
+
+}
+
+int tcpserver::write(std::string message) {
+    boost::asio::write(socket, boost::asio::buffer(message));
     return 0;
 }

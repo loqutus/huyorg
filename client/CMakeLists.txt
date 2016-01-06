@@ -1,4 +1,7 @@
 project(client CXX)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(OPTPARSE ../lib/optparse/optparse.cpp)
+add_library(optparse ${OPTPARSE})
 set(SOURCE_FILES main.cpp main.h)
 add_executable(client ${SOURCE_FILES})
+target_link_libraries(client LINK_PUBLIC optparse ${Boost_LIBRARIES})

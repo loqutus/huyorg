@@ -16,5 +16,7 @@ int main(int argc, char **argv) {
     const std::string server_port = conf.get(std::string("port"));
     tcpserver server(server_port);
     log.write("listening on port", server_port);
+    server.accept();
+    server.write(std::string("hello"));
     return 0;
 }
