@@ -8,12 +8,11 @@
 #include <boost/lexical_cast.hpp>
 #include <string>
 class tcpclient {
-    tcpclient(std::string host, std::string port = std::string("9999"));
+public:
+    tcpclient(std::string host, std::string port);
 private:
-    boost::asio::io_service io_service;
-    boost::asio::ip::tcp::resolver resolver;
-    boost::asio::ip::tcp::resolver::query query;
-    boost::asio::ip::tcp::resolver::iterator endpoint;
+    boost::asio::io_service aios;
+    boost::asio::ip::tcp::socket socket;
 };
 
 
