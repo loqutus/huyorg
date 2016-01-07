@@ -18,6 +18,6 @@ int main(int argc, char **argv) {
     log.write("listening on port", server_port);
     server.accept();
     server.write(std::string("hello"));
-    log.write("exiting")
+    log.write("exiting");
     return 0;
 }
