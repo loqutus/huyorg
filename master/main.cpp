@@ -17,7 +17,10 @@ int main(int argc, char **argv) {
     tcpserver server(server_port);
     log.write("listening on port", server_port);
     server.accept();
+    log.write("send hello");
     server.write(std::string("hello"));
+    std::string read = server.read();
+    log.write("receive: ", read);
     log.write("exiting");
     return 0;
 }

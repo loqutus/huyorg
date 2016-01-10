@@ -11,6 +11,7 @@ class tcpclient {
 public:
     tcpclient(std::string host, std::string port);
     std::string send(std::string message);
+    std::string read();
 private:
     boost::asio::io_service aios;
     boost::asio::ip::tcp::socket socket;

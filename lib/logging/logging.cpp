@@ -16,6 +16,6 @@ int logging::write(const char *left, std::string right) {
     time_t rawtime;
     time(&rawtime);
     std::string time_str(ctime(&rawtime));
-    logfile << time_str.substr(0, time_str.size()-1) << " " << left << " " << right << std::endl;
+    logfile << time_str << " " << left << " " << right << std::endl;
     return 0;
 }

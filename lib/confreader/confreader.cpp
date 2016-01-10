@@ -24,10 +24,10 @@ confreader::~confreader() {
 }
 
 std::string confreader::get(std::string key) {
-    if (conf_map.find(key) == conf_map.end()) {
+    if (conf_map.find(std::string(key)) == conf_map.end()) {
         return std::string("");
     }
     else {
-        return conf_map[key];
+        return conf_map[std::string(key)];
     }
 }
