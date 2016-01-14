@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.2)
+cmake_minimum_required(VERSION 3.0)
 set(BOOST_ROOT "/usr/local/boost")
 set(CMAKE_LIBRARY_PATH "/usr/local/boost/lib")
 set(CMAKE_INCLUDE_PATH "/usr/local/boost/include/boost")
