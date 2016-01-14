@@ -5,14 +5,14 @@
 #include "optparse.h"
 
 optparse::optparse(int argc, char **argv) : desc("Options:") {
-    std::string host{"::1"};
-    std::string port{"9999"};
-    std::string command{""};
-    std::string config{""};
-    std::string pod{""};
+    std::string host;
+    std::string port;
+    std::string command;
+    std::string config;
+    std::string pod;
     desc.add_options()
-            ("host", boost::program_options::value(&host), "master host")
-            ("port", boost::program_options::value(&port), "master port")
+            ("host", boost::program_options::value(&host)->default_value(std::string("::1")), "master host")
+            ("port", boost::program_options::value(&port)->default_value(std::string("9999")), "master port")
             ("command", boost::program_options::value(&command), "command to execute: upload, run or stop")
             ("config", boost::program_options::value(&config), "pod config to upload")
             ("pod", boost::program_options::value(&pod), "pod name");

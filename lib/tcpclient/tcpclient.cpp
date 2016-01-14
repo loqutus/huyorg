@@ -9,6 +9,7 @@ tcpclient::tcpclient(std::string host, std::string port) : socket(boost::asio::i
 
 std::string tcpclient::send(std::string message) {
     boost::asio::write(socket, boost::asio::buffer(message));
+    return std::string("OK");
 }
 
 std::string tcpclient::read() {

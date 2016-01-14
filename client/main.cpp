@@ -2,11 +2,9 @@
 
 int main(int argc, char** argv){
     optparse options(argc, argv);
-    tcpclient client(options.get(std::string("host")), options.get(std::string("port")));
     std::string command = options.get("command");
-    switch(command.c_str()){
-        case "upload":
-    }
-
+    tcpclient client(options.get(std::string("host")), options.get(std::string("port")));
+    if (command == std::string("upload"))
+        upload (options.get(std::string("config")), client);
 	return 0;
 }

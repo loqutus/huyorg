@@ -20,7 +20,7 @@ int main(int argc, char **argv) {
     log.write("send hello");
     server.write(std::string("hello"));
     std::string read = server.read();
-    log.write("receive: ", read);
+    log.write("received: ", read);
     log.write("exiting");
     return 0;
 }
