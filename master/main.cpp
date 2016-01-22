@@ -1,7 +1,3 @@
-//
-// Created by Ruslan Gustomyasov on 21/11/15.
-//
-
 #include "main.h"
 #include "../lib/tcpserver/tcpserver.h"
 #include "../lib/logging/logging.h"
@@ -14,13 +10,15 @@ int main(int argc, char **argv) {
     log.write("starting master");
     log.write("read config file", conf_file);
     const std::string server_port = conf.get(std::string("port"));
-    tcpserver server(server_port);
-    log.write("listening on port", server_port);
-    server.accept();
-    log.write("send hello");
-    server.write(std::string("hello"));
-    std::string read = server.read();
-    log.write("received: ", read);
+	while(true){
+    	tcpserver server(server_port);
+    	log.write("listening on port", server_port);
+    	server.accept();
+    	log.write("client connected");
+    	std::string s = server.read();
+		log.write("received: ", s);
+		server.write(std::string("boom"));
+	}
     log.write("exiting");
     return 0;
 }

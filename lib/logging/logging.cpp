@@ -1,7 +1,3 @@
-//
-// Created by Ruslan Gustomyasov on 21/11/15.
-//
-
 #include "logging.h"
 
 logging::logging(std::string logfilename) {
@@ -13,6 +9,7 @@ logging::~logging() {
 }
 
 int logging::write(const char *left, std::string right) {
+	right.erase(std::remove(right.begin(), right.end(), '\n'), right.end());
     time_t rawtime;
     time(&rawtime);
     std::string time_str(ctime(&rawtime));

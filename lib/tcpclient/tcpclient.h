@@ -10,7 +10,7 @@
 class tcpclient {
 public:
     tcpclient(std::string host, std::string port);
-    std::string send(std::string message);
+    int write(std::string message);
     std::string read();
 private:
     boost::asio::io_service aios;
