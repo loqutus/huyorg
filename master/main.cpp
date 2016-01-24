@@ -1,7 +1,4 @@
 #include "main.h"
-#include "../lib/tcpserver/tcpserver.h"
-#include "../lib/logging/logging.h"
-#include "../lib/confreader/confreader.h"
 
 int main(int argc, char **argv) {
     const std::string conf_file("../master/master.conf");
@@ -10,12 +7,16 @@ int main(int argc, char **argv) {
     log.write("starting master");
     log.write("read config file", conf_file);
     const std::string server_port = conf.get(std::string("port"));
+	log.write("port", server_port);
 	while(true){
     	tcpserver server(server_port);
-    	log.write("listening on port", server_port);
+    	log.write("listening");
     	server.accept();
     	log.write("client connected");
     	std::string s = server.read();
+		json json_object(s);
+		std::unordered_map<std::string, std::string> json_map = json_object.get_map();
+		std::string action = json_map[std::string("action")];
 		log.write("received: ", s);
 		server.write(std::string("boom"));
 	}

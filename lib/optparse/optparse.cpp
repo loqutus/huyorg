@@ -13,9 +13,7 @@ optparse::optparse(int argc, char **argv) : desc("Options:") {
     desc.add_options()
             ("host", boost::program_options::value(&host)->default_value(std::string("::1")), "master host")
             ("port", boost::program_options::value(&port)->default_value(std::string("9999")), "master port")
-            ("command", boost::program_options::value(&command), "command to execute: upload, run or stop")
-            ("config", boost::program_options::value(&config), "pod config to upload")
-            ("pod", boost::program_options::value(&pod), "pod name");
+            ("json", boost::program_options::value(&config), "json to upload");
     boost::program_options::store(boost::program_options::parse_command_line(argc, argv, desc), vm);
     boost::program_options::notify(vm);
 }

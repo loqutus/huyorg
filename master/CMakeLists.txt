@@ -3,10 +3,12 @@ set(SOURCE_FILES main.cpp main.h)
 set(LOGGING ../lib/logging/logging.cpp)
 set(TCPSERVER ../lib/tcpserver/tcpserver.cpp)
 set(CONFREADER ../lib/confreader/confreader.cpp)
+set(JSON ../lib/json/json.cpp)
 add_library(logging ${LOGGING})
 add_library(tcpserver ${TCPSERVER})
 add_library(confreader ${CONFREADER})
+add_library(json ${JSON})
 add_executable(master ${SOURCE_FILES})
-target_link_libraries(master LINK_PUBLIC tcpserver logging confreader ${Boost_LIBRARIES})
+target_link_libraries(master LINK_PUBLIC tcpserver logging confreader json ${Boost_LIBRARIES})
 
 

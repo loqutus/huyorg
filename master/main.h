@@ -8,6 +8,7 @@
 #include "../lib/confreader/confreader.h"
 #include "../lib/logging/logging.h"
 #include "../lib/tcpserver/tcpserver.h"
+#include "../lib/json/json.h"
 #include <iostream>
 int main(int argc, char **argv);
 

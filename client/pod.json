@@ -1,0 +1,5 @@
+{
+	"action": "run",
+	"name": "sleep",
+	"command": "/bin/sleep 10"  
+}
