@@ -1,11 +1,6 @@
 #include "storage.h"
 
-storage::storage(std::string storagefilename) {
-    storage_file.open(storagefilename, std::ios::out);
-}
-
 storage::~storage() {
-    storage_file.close();
 	storage_map.clear();
 }
 

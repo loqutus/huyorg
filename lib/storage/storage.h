@@ -6,7 +6,6 @@
 #include <unordered_map>
 
 class storage {
-    std::ofstream storage_file;
 	std::unordered_map<std::string, std::string> storage_map;
 public:
     storage(std::string storagefilename);
