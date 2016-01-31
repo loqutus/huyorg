@@ -6,6 +6,6 @@ int main(int argc, char** argv){
 	read_file file(options.get(std::string("json")));
 	std::string file_str = file.read();
 	client.write(file_str);
-	std::cout << "read: " << client.read();
+	std::cout << client.read() << std::endl;
 	return 0;
 }

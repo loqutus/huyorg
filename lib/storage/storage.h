@@ -6,12 +6,17 @@
 #include <unordered_map>
 
 class storage {
-	std::unordered_map<std::string, std::string> storage_map;
+	std::unordered_map<std::string, std::unordered_map<std::string, std::string> > slaves_map;
+	std::unordered_map<std::string, std::unordered_map<std::string, std::string> > pods_map;
+	std::unordered_map<std::string, std::unordered_map<std::string, std::string> > containers_map;
 public:
-    storage(std::string storagefilename);
     ~storage();
-    int set(std::string key, std::string value);
-	std::string get(std::string key);
+    int set_slave(std::string key, std::unordered_map<std::string, std::string> value);
+    int set_pod(std::string key, std::unordered_map<std::string, std::string> value);
+    int set_container(std::string key, std::unordered_map<std::string, std::string> value);
+	std::unordered_map<std::string, std::string> get_slave(std::string key);
+	std::unordered_map<std::string, std::string> get_pod(std::string key);
+	std::unordered_map<std::string, std::string> get_container(std::string key);
 };
 
 #endif //PROJECT_STORAGE_H

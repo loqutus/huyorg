@@ -1,7 +1,7 @@
 #include "main.h"
 
 int main(int argc, char **argv) {
-	Master master;
-	master.listen();
+	master Master;
+	Master.listen();
     return 0;
 }

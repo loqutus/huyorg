@@ -1,5 +1,5 @@
 {
-	"action": "run",
-	"name": "sleep",
-	"command": "/bin/sleep 10"  
+	"action": "add_pod",
+	"pod_name": "sleep",
+	"pod_command": "/bin/sleep 10"  
 }
