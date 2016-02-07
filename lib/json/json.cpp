@@ -9,17 +9,19 @@ json::~json(){
 }
 
 std::unordered_map<std::string, std::string> json::get_map(){
+	std::unordered_map<std::string, std::string> map;
 	boost::property_tree::ptree ptree;
 	std::stringstream ss;
 	ss << input_string;
 	boost::property_tree::read_json(ss, ptree);
 	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, ptree){
-		this->map[v.first] = v.second.data();
+		map[v.first] = v.second.data();
 	}
-	return this->map;
+	return map;
 }
 
-std::unordered_map<std::string, std::string> json::get_map_of_maps(){
+std::unordered_map<std::string, std::pair<std::string, std::string>> json::get_map_of_maps(){
+	std::list<std::unordered_map<std::string, std::string>> result_list;
 	boost::property_tree::ptree ptree;
 	std::stringstream ss;
 	ss << input_string;
@@ -30,9 +32,11 @@ std::unordered_map<std::string, std::string> json::get_map_of_maps(){
 		std::stringstream ss2;
 		ss2 << input_string2;
 		boost::property_tree::read_json(ss2, ptree2);
+		std::unordered_map<std::string, std::string> temp_map;
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v2, ptree2){
-			this->map[v.first] = v.second.data();
+			temp_map[p2->first] = p2->second;
 		}
+		result_list.push_back(temp_map);
 	}
-	return this->map;
+	return result_list;
 }

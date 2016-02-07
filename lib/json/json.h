@@ -8,6 +8,7 @@
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/foreach.hpp>
 #include <unordered_map>
+#include <list>
 
 class json {
 	std::string input_string;
@@ -15,7 +16,7 @@ public:
 	json(std::string input);
 	~json();
 	std::unordered_map<std::string, std::string> get_map();
-	std::unordered_map<std::string, std::unordered_map<std::string, std::string> > get_map_of_maps();
+	std::list<std::map<std::string, std::string> > get_list_of_maps();
 };
 
 #endif //PROJECT_JSON_H
