@@ -1,34 +1,11 @@
-#include "storage.h"
+#include "dockerclient.h"
 
-storage::~storage() {
-	slaves_map.clear();
-	pods_map.clear();
-	containers_map.clear();
+dockerclient::dockerclient(std::string docker_host, std::string docker_port):
+httpclient(docker_host, docker_port){
 }
 
-int storage::set_slave(std::string key, std::unordered_map<std::string, std::string> value) {
-	this->slaves_map[key] = value;
-    return 0;
-}
-
-int storage::set_pod(std::string key, std::unordered_map<std::string, std::string> value) {
-	this->pods_map[key] = value;
-    return 0;
-}
-
-int storage::set_container(std::string key, std::unordered_map<std::string, std::string> value) {
-	this->slaves_map[key] = value;
-    return 0;
-}
-
-std::unordered_map<std::string, std::string> storage::get_slave(std::string key) {
-	return this->slaves_map[key];
-}
-
-std::unordered_map<std::string, std::string> storage::get_pod(std::string key) {
-	return this->pods_map[key];
-}
-
-std::unordered_map<std::string, std::string> storage::get_container(std::string key) {
-	return this->containers_map[key];
+std::list<std::string> get_containers(){
+	std::string json_string = http_client.get(std::string("/containers/json"));
+	json json_object(json_string);
+	auto json_map json_object()
 }

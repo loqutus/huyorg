@@ -10,6 +10,7 @@
 #include "../lib/tcpserver/tcpserver.h"
 #include "../lib/json/json.h"
 #include "master.h"
+#include "watcher.h"
 #include <iostream>
 int main(int argc, char **argv);
 

@@ -1,17 +1,17 @@
 #ifndef PROJECT_DOCKERCLIENT_H
 #define PROJECT_DOCKERCLIENT_H
 
-#include "../tcpclient/tcpclient.h"
+#include "../httpclient/httpclient.h"
 #include "../json/json.h"
 #include <unordered_map>
 #include <string>
+#include <list>
 
 class dockerclient {
-	tcpclient tcp_client;
+	httpclient http_client;
 public:
 	dockerclient(std::string docker_host, std::string docker_port);
-	std::string run_container();
-	std::unordered_map<std::string, std::string> send(std::string command);
+	std::list<std::string> get_containers();
 };
 
 #endif //PROJECT_DOCKERCLIENT_H

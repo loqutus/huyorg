@@ -10,12 +10,12 @@
 #include <unordered_map>
 
 class json {
-	std::unordered_map<std::string, std::string> map;
-	std::string string;
+	std::string input_string;
 public:
 	json(std::string input);
 	~json();
 	std::unordered_map<std::string, std::string> get_map();
+	std::unordered_map<std::string, std::unordered_map<std::string, std::string> > get_map_of_maps();
 };
 
 #endif //PROJECT_JSON_H

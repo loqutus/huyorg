@@ -12,7 +12,6 @@ class master{
 	confreader conf;
 	logging log;
 	const std::string server_port;
-	storage store;
 public:
 	master();
 	~master();
