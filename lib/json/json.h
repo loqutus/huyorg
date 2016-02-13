@@ -16,7 +16,7 @@ public:
 	json(std::string input);
 	~json();
 	std::unordered_map<std::string, std::string> get_map();
-	std::list<std::map<std::string, std::string> > get_list_of_maps();
+	std::list<std::unordered_map<std::string, std::string> > get_list_of_maps();
 };
 
 #endif //PROJECT_JSON_H

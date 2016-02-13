@@ -7,6 +7,7 @@
 #include "../lib/json/json.h"
 #include "../lib/storage/storage.h"
 #include <iostream>
+
 class master{
 	const std::string conf_file;
 	confreader conf;
@@ -18,4 +19,5 @@ public:
 	void listen();
 	std::string do_action(std::unordered_map<std::string, std::string> json_map);
 };
+
 #endif //PROJECT_MASTER_H
