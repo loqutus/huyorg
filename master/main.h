@@ -12,6 +12,8 @@
 #include "master.h"
 #include "watcher.h"
 #include <iostream>
+#include <thread>
+
 int main(int argc, char **argv);
 
 #endif //PROJECT_MAIN_H
