@@ -1,6 +1,6 @@
 #include "storage.h"
 
-storage store;
+std::unique_ptr<storage> store;
 
 storage::~storage() {
 	slaves_map.clear();
@@ -35,24 +35,24 @@ std::unordered_map<std::string, std::string> storage::get_container(std::string 
 	return this->containers_map[key];
 }
 
-std::list<std::string> storage::get_slaves_list(){
-	std::list<std::string> slaves_list;
+std::vector<std::string> storage::get_slaves_list(){
+	std::vector<std::string> slaves_list;
 	for(auto const &iterator: this->slaves_map){
 		slaves_list.push_back(iterator.first);
 	}
 	return slaves_list;
 }
 
-std::list<std::string> storage::get_pods_list(){
-	std::list<std::string> pods_list;
+std::vector<std::string> storage::get_pods_list(){
+	std::vector<std::string> pods_list;
 	for(auto const &iterator: this->pods_map){
 		pods_list.push_back(iterator.first);
 	}
 	return pods_list;
 }
 
-std::list<std::string> storage::get_containers_list(){
-	std::list<std::string> containers_list;
+std::vector<std::string> storage::get_containers_list(){
+	std::vector<std::string> containers_list;
 	for(auto const &iterator: this->containers_map){
 		containers_list.push_back(iterator.first);
 	}

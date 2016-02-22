@@ -4,7 +4,8 @@
 #include <fstream>
 #include <string>
 #include <unordered_map>
-#include <list>
+#include <vector>
+#include <memory>
 
 class storage {
 	std::unordered_map<std::string, std::unordered_map<std::string, std::string> > slaves_map;
@@ -18,11 +19,12 @@ public:
 	std::unordered_map<std::string, std::string> get_slave(std::string key);
 	std::unordered_map<std::string, std::string> get_pod(std::string key);
 	std::unordered_map<std::string, std::string> get_container(std::string key);
-	std::list<std::string> get_slaves_list();
-	std::list<std::string> get_pods_list();
-	std::list<std::string> get_containers_list();
+	std::vector<std::string> get_slaves_list();
+	std::vector<std::string> get_pods_list();
+	std::vector<std::string> get_containers_list();
 	
 };
-extern storage store;
+//extern storage store;
+extern std::unique_ptr<storage> store;
 
 #endif //PROJECT_STORAGE_H

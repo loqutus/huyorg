@@ -12,6 +12,7 @@ class dockerclient {
 public:
 	dockerclient(std::string docker_host, std::string docker_port);
 	std::list<std::string> get_containers();
+	std::string run_container(std::string image, std::string command);
 };
 
 #endif //PROJECT_DOCKERCLIENT_H

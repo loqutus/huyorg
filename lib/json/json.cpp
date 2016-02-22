@@ -4,8 +4,26 @@ json::json(std::string input){
 	this->input_string = input;
 }
 
+json::json(std::unordered_map<std::string, std::string> input){
+	this->input_map = input;
+}
+
 json::~json(){
 	input_string.clear();
+}
+
+std::string json::get_string(){
+	std::string str("{");
+	for(auto kv:this->input_map){
+		str += " \"";
+		str += kv.first;
+		str += "\" : \"";
+	    str += kv.second;
+		str += "\" ,";
+	}
+	str.pop_back();
+	str += "}";
+	return str;
 }
 
 std::unordered_map<std::string, std::string> json::get_map(){

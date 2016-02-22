@@ -12,11 +12,14 @@
 
 class json {
 	std::string input_string;
+	std::unordered_map<std::string, std::string> input_map;
 public:
 	json(std::string input);
+	json(std::unordered_map<std::string, std::string> input);
 	~json();
 	std::unordered_map<std::string, std::string> get_map();
 	std::list<std::unordered_map<std::string, std::string> > get_list_of_maps();
+	std::string get_string();
 };
 
 #endif //PROJECT_JSON_H

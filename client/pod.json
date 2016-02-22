@@ -1,5 +1,7 @@
 {
 	"action": "add_pod",
 	"pod_name": "sleep",
-	"pod_command": "/bin/sleep 10"  
+	"pod_command": "/bin/sleep 10",
+	"pod_count": "10",
+	"pod_image": "ubuntu:latest"  
 }
