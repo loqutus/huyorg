@@ -5,6 +5,8 @@
 #include <string>
 #include <time.h>
 #include <algorithm>
+#include <memory>
+#include "../confreader/confreader.h"
 
 class logging {
     std::ofstream logfile;
@@ -15,5 +17,7 @@ public:
 
     int write(const char* left, std::string right=std::string(""));
 };
+
+extern logging log_obj;
 
 #endif //PROJECT_LOGGING_H

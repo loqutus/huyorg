@@ -25,8 +25,15 @@ bool watcher::check_pod_in_containers(std::string pod_name, std::vector<std::str
 	return std::find(containers_list.begin(), containers_list.end(), pod_name) != containers_list.end();
 }
 
+
 void watcher::watch(){
+	log_obj.write("starting watcher");
 	while(true){
+		if (store->count_slaves() == 0){
+			log_obj.write("sleeping 60 seconds");
+			std::this_thread::sleep_for(std::chrono::milliseconds(60000));
+			continue;
+		}
 		auto running_containers = this->get_running_containers();
 		auto pods_list = store->get_pods_list();
 		auto containers_list = store->get_containers_list();
@@ -57,14 +64,18 @@ void watcher::watch(){
 				}
 			}
 		}
+		log_obj.write("sleeping 60 seconds");
 		std::this_thread::sleep_for(std::chrono::milliseconds(60000));
 	}
 }
 
 std::string watcher::run_container(std::string slave, std::string image, std::string command){
 	dockerclient docker_client(this->get_host(slave), this->get_port(slave));
-	docker_client.run_container(image, command);
+	std::string container_id = docker_client.run_container(image, command);
+	return container_id;
 }
+
+
 
 std::unordered_map<std::string, std::list<std::string> > watcher::get_running_containers(){
 	auto slaves_list = store->get_slaves_list();

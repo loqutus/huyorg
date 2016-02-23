@@ -9,9 +9,6 @@
 #include <iostream>
 
 class master{
-	const std::string conf_file;
-	confreader conf;
-	logging log;
 	const std::string server_port;
 public:
 	master();

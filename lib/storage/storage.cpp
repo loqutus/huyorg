@@ -1,11 +1,13 @@
 #include "storage.h"
 
-std::unique_ptr<storage> store;
-
 storage::~storage() {
 	slaves_map.clear();
 	pods_map.clear();
 	containers_map.clear();
+}
+
+int storage::count_slaves(){
+	return int(slaves_map.size());
 }
 
 int storage::set_slave(std::string key, std::unordered_map<std::string, std::string> value) {

@@ -17,10 +17,15 @@ std::list<std::string> dockerclient::get_containers(){
 
 
 std::string dockerclient::run_container(std::string image, std::string command){
-	std::string str;
-	str += "{ \"Image\" : \"";
-	str += image;
-	str += "\", \"Cmd\" : [ \"";
-	str += command;
-	str += "\" ] }";
+	std::string body;
+	body += "{ \"Image\" : \"";
+	body += image;
+	body += "\", \"Cmd\" : [ \"";
+	body += command;
+	body += "\" ] }";
+	auto response = http_client.post("/containers/create", body);
+	json json_object(response);
+	auto map = json_object.get_map();
+	std::string container_id = map["Id"];
+	return container_id;
 }

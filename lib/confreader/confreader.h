@@ -1,7 +1,3 @@
-//
-// Created by Ruslan Gustomyasov on 21/11/15.
-//
-
 #ifndef PROJECT_CONFREADER_H
 #define PROJECT_CONFREADER_H
 
@@ -22,5 +18,5 @@ private:
     std::ifstream conffile;
     std::map<std::string, std::string> conf_map;
 };
-
-#endif //PROJECT_CONFREADER_H
+extern confreader conf;
+#endif
