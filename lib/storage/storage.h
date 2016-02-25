@@ -16,7 +16,7 @@ public:
     int set_slave(std::string key, std::unordered_map<std::string, std::string> value);
     int set_pod(std::string key, std::unordered_map<std::string, std::string> value);
     int set_container(std::string key, std::unordered_map<std::string, std::string> value);
-	int count_slaves();
+	bool is_slaves_empty();
 	std::unordered_map<std::string, std::string> get_slave(std::string key);
 	std::unordered_map<std::string, std::string> get_pod(std::string key);
 	std::unordered_map<std::string, std::string> get_container(std::string key);
@@ -26,6 +26,6 @@ public:
 	
 };
 //extern storage store;
-extern std::unique_ptr<storage> store;
+extern storage store;
 
 #endif //PROJECT_STORAGE_H

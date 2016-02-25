@@ -6,8 +6,8 @@ storage::~storage() {
 	containers_map.clear();
 }
 
-int storage::count_slaves(){
-	return int(slaves_map.size());
+bool storage::is_slaves_empty(){
+	return slaves_map.empty();
 }
 
 int storage::set_slave(std::string key, std::unordered_map<std::string, std::string> value) {

@@ -29,16 +29,16 @@ bool watcher::check_pod_in_containers(std::string pod_name, std::vector<std::str
 void watcher::watch(){
 	log_obj.write("starting watcher");
 	while(true){
-		if (store->count_slaves() == 0){
+		if (store.is_slaves_empty()){
 			log_obj.write("sleeping 60 seconds");
 			std::this_thread::sleep_for(std::chrono::milliseconds(60000));
 			continue;
 		}
 		auto running_containers = this->get_running_containers();
-		auto pods_list = store->get_pods_list();
-		auto containers_list = store->get_containers_list();
+		auto pods_list = store.get_pods_list();
+		auto containers_list = store.get_containers_list();
 		for (auto pod_name : pods_list){
-			auto pod_map = store->get_pod(pod_name);
+			auto pod_map = store.get_pod(pod_name);
 			auto pod_command = pod_map["pod_command"];
 			auto pod_image = pod_map["pod_image"];
 			int pod_count = std::stoi(pod_map["count"]);
@@ -51,7 +51,7 @@ void watcher::watch(){
 			*/
 			if (!pod_in_containers){
 				int containers_to_run = pod_count;
-				auto randomized_slaves_list = store->get_slaves_list();
+				auto randomized_slaves_list = store.get_slaves_list();
 				std::random_shuffle(randomized_slaves_list.begin(), randomized_slaves_list.end());
 				for (auto slave:randomized_slaves_list){
 					if (containers_to_run != 0){
@@ -78,7 +78,7 @@ std::string watcher::run_container(std::string slave, std::string image, std::st
 
 
 std::unordered_map<std::string, std::list<std::string> > watcher::get_running_containers(){
-	auto slaves_list = store->get_slaves_list();
+	auto slaves_list = store.get_slaves_list();
 	std::unordered_map<std::string, std::list<std::string> > running_containers;
 	for (std::string slave : slaves_list) {
 		    dockerclient docker_client(get_host(slave), get_port(slave));
