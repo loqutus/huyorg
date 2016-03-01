@@ -1,7 +1,7 @@
 #include "main.h"
 
 storage store;
-confreader conf("master/master.conf");
+confreader conf("../master/master.conf");
 logging log_obj(conf.get("log"));
 
 void run_master(){
