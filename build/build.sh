@@ -2,6 +2,6 @@
 for i in $(ls | grep -v build.sh); do
 	rm -Rf ./$i
 done
-export CXX="/usr/bin/clang++" 
+export CXX="/usr/bin/clang++-3.5" 
 cmake .. -DCMAKE_BUILD_TYPE=Debug
-make -j 4
+make -j 8
