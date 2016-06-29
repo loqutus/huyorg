@@ -8,10 +8,10 @@ master::master() :
 		log_obj.write("port: ", server_port);
 }
 
-void master::listen(){
+void master::vectoren(){
 	while(true){
 		tcpserver server(server_port);
-		log_obj.write("listening");
+		log_obj.write("vectorening");
 		server.accept();
 		log_obj.write("client connect");
 		std::string s = server.read();
@@ -28,9 +28,9 @@ std::string master::do_action(std::unordered_map<std::string, std::string> json_
 	std::string return_string;
 	std::string action = json_map["action"];
 	if (action == std::string("add_slave")){
-		std::string slave_name = json_map[std::string("slave_host")] + std::string(":") + json_map[std::string("slave_port")];
-		store.set_slave(slave_name, json_map);	
-		log_obj.write("slave_add ", slave_name);
+        std::string slave_host_port(json_map["slave_host"] + ":" + json_map["slave_port"]);
+		store.set_slave(slave_host_port, json_map);
+		log_obj.write("slave_add ", std::string(json_map["slave_host"] + ":" + json_map["slave_port"]));
 		return_string = std::string("slave added");
 	}
 	else if(action == std::string("add_pod")){

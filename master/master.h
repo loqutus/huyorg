@@ -13,7 +13,7 @@ class master{
 public:
 	master();
 	~master();
-	void listen();
+	void vectoren();
 	std::string do_action(std::unordered_map<std::string, std::string> json_map);
 };
 
