@@ -1,7 +1,7 @@
 #include "main.h"
 
 int main(int argc, char **argv) {
-    const std::string conf_file("../slave/slave.conf");
+    const std::string conf_file("../test/slave.conf");
     confreader conf(conf_file);
     logging log(conf.get(std::string("log")));
     log.write("starting slave");

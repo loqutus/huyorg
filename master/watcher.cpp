@@ -34,36 +34,6 @@ void watcher::watch(){
 			std::this_thread::sleep_for(std::chrono::milliseconds(60000));
 			continue;
 		}
-		auto running_containers = this->get_running_containers();
-		auto pods_vector = store.get_pods_vector();
-		auto containers_vector = store.get_containers_vector();
-		for (auto pod_name : pods_vector){
-			auto pod_map = store.get_pod(pod_name);
-			auto pod_command = pod_map["pod_command"];
-			auto pod_image = pod_map["pod_image"];
-			int pod_count = std::stoi(pod_map["count"]);
-			bool pod_in_containers = check_pod_in_containers(pod_name, containers_vector);
-			/*if (pod_in_containers){
-				auto pod_containers = store->get_container(pod_name);
-				for (auto container : containers_vector){
-					
-				}
-			*/
-			if (!pod_in_containers){
-				int containers_to_run = pod_count;
-				auto randomized_slaves_vector = store.get_slaves_vector();
-				std::random_shuffle(randomized_slaves_vector.begin(), randomized_slaves_vector.end());
-				for (auto slave:randomized_slaves_vector){
-					if (containers_to_run != 0){
-						auto container_id = run_container(slave, pod_image, pod_command);
-						containers_to_run--;
-					}
-					else{
-						break;
-					}
-				}
-			}
-		}
 		log_obj.write("sleeping 60 seconds");
 		std::this_thread::sleep_for(std::chrono::milliseconds(60000));
 	}
