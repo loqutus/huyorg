@@ -1,17 +1,20 @@
 #ifndef PROJECT_CONTAINER_H
 #define PROJECT_CONTAINER_H
 
-#include "../json/json.h"
-#include <unordered_map>
 #include <string>
-#include <list>
+#include <unordered_map>
+#include <vector>
+#include "../httpclient/httpclient.h"
+#include "../json/json.h"
 
 class container {
+  httpclient http_client;
 
-public:
-	dockerclient(std::string docker_host, std::string docker_port);
-	std::list<std::string> get_containers();
-	std::string run_conta:ner(std::string image, std::string command);
+ public:
+  container(std::string host, std::string port);
+  std::list<std::string> get_containers();
+  std::string run_container(std::string image, std::string command);
+  std::string destroy_container(std::string container_id);
 };
 
-#endif //PROJECT_CONTAINER_H
+#endif  // PROJECT_CONTAINER_H

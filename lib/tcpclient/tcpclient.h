@@ -8,14 +8,14 @@
 #include <boost/lexical_cast.hpp>
 #include <string>
 class tcpclient {
-public:
-    tcpclient(std::string host, std::string port);
-    int write(std::string message);
-    std::string read();
-private:
-    boost::asio::io_service aios;
-    boost::asio::ip::tcp::socket socket;
+ public:
+  tcpclient(std::string host, std::string port);
+  int write(std::string message);
+  std::string read();
+
+ private:
+  boost::asio::io_service aios;
+  boost::asio::ip::tcp::socket socket;
 };
 
-
-#endif //PROJECT_TCPCLIENT_H
+#endif  // PROJECT_TCPCLIENT_H
