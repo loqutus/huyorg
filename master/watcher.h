@@ -12,10 +12,11 @@
 #include "../lib/slave_client/slave_client.h"
 #include "../lib/storage/storage.h"
 #include "../lib/tcpserver/tcpserver.h"
+#include "../lib/host_port_parser/host_port_parser.h"
 
 class watcher {
  public:
-  void watch();
+  int watch();
 };
 
 #endif  // PROJECT_WATCHER_H

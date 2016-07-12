@@ -16,6 +16,7 @@ class storage {
   std::unordered_map<std::string, std::unordered_map<std::string, std::string>>
       containers_map;
 
+
  public:
   ~storage();
   int set_slave(std::string host_port,

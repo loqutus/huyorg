@@ -6,7 +6,7 @@ master::master() : server_port(conf.get(std::string("port"))) {
   log_obj.write("port: ", server_port);
 }
 
-void master::listen() {
+int master::listen() {
   while (true) {
     tcpserver server(server_port);
     log_obj.write("listening");
@@ -19,6 +19,9 @@ void master::listen() {
     std::string action = json_map[std::string("action")];
     log_obj.write("client action:", action);
     std::string action_string = this->do_action(json_map);
+    if (action_string == "exit"){
+      return 0;
+    }
     server.write(action_string);
   }
 }
@@ -53,7 +56,10 @@ std::string master::do_action(
     store.remove_pod(pod_name);
     log_obj.write("pod_remove ", pod_name);
     return_string = std::string("pod removed");
-
+  }
+  else if (action == std::string("stop")){
+    log_obj.write("exit");
+    return_string = std::string("exit");
   }
   return return_string;
 }
