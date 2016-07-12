@@ -14,7 +14,7 @@ class master {
  public:
   master();
   ~master();
-  void vectoren();
+  void listen();
   std::string do_action(std::unordered_map<std::string, std::string> json_map);
 };
 

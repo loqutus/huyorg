@@ -18,9 +18,20 @@ int storage::set_slave(std::string key,
   return 0;
 }
 
+int storage::remove_slave(std::string key){
+ this->slaves_map.erase(key); 
+ return 0;
+}
+
+
 int storage::set_pod(std::string key,
                      std::unordered_map<std::string, std::string> value) {
   this->pods_map[key] = value;
+  return 0;
+}
+
+int storage::remove_pod(std::string key){
+  this->pods_map.erase(key);
   return 0;
 }
 

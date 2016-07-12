@@ -31,6 +31,8 @@ class storage {
                                                             // container id,
                                                             // value value =
                                                             // container status
+  int remove_slave(std::string host_port);
+  int remove_pod(std::string key);
   bool is_slaves_empty();
   bool is_pods_empty();
   bool is_containers_empty();

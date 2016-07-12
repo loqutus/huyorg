@@ -5,6 +5,7 @@
 #include <thread>
 #include "master.h"
 #include "watcher.h"
+#include "scheduler.h"
 
 int main(int argc, char **argv);
 

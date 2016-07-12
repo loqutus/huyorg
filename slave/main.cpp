@@ -6,13 +6,15 @@ int main(int argc, char **argv) {
   logging log(conf.get(std::string("log")));
   log.write("starting slave");
   log.write("read config file", conf_file);
-  const std::string server_host = conf.get(std::string("host"));
-  log.write("host", server_host);
-  const std::string server_port = conf.get(std::string("port"));
-  log.write("port", server_port);
-  container container_server(server_host, server_port);
+  const std::string listen_port = conf.get(std::string("port"));
+  log.write("listen_port", listen_port);
+  const std::string docker_port = conf.get(std::string("docker_port"));
+  log.write("docker_port", docker_port);
+  const std::string docker_host = conf.get(std::string("docker_host"));
+  log.write("docker_host", docker_host);
+  container container_server(docker_host, docker_port);
   while (true) {
-    tcpserver server(server_port);
+    tcpserver server(listen_port);
     log.write("listening");
     server.accept();
     log.write("master connected");

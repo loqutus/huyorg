@@ -1,9 +1,9 @@
 #include "container.h"
 
 container::container(std::string host, std::string port)
-    : http_client(docker_host, docker_port) {}
+    : http_client(host, port) {}
 
-std::list<std::string> dockerclient::get_containers() {
+std::list<std::string> container::get_containers() {
   std::string json_string = http_client.get(std::string("/containers/json"));
   json json_object(json_string);
   auto list_of_maps = json_object.get_list_of_maps();
@@ -14,7 +14,7 @@ std::list<std::string> dockerclient::get_containers() {
   return list_of_strings;
 }
 
-std::string dockerclient::run_container(std::string image,
+std::string container::run_container(std::string image,
                                         std::string command) {
   std::string body;
   body += "{ \"Image\" : \"";
@@ -27,4 +27,13 @@ std::string dockerclient::run_container(std::string image,
   auto map = json_object.get_map();
   std::string container_id = map["Id"];
   return container_id;
+}
+
+std::string container::destroy_container(std::string container_id){
+  std::string body("");
+  std::string url = "/containers/";
+  url += container_id;
+  url += "/kill";
+  auto response = http_client.post(url, body);
+  return response;
 }
