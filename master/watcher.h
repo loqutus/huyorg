@@ -6,6 +6,7 @@
 #include <iostream>
 #include <thread>
 #include <list>
+#include <unistd.h>
 #include "../lib/confreader/confreader.h"
 #include "../lib/json/json.h"
 #include "../lib/logging/logging.h"

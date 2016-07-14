@@ -3,21 +3,21 @@
 int main(int argc, char **argv) {
   const std::string conf_file("../test/slave.conf");
   confreader conf(conf_file);
-  logging log(conf.get(std::string("log")));
-  log.write("starting slave");
-  log.write("read config file", conf_file);
+  logging log_obj(conf.get(std::string("log")));
+  log_obj.write("starting slave");
+  log_obj.write("read config file", conf_file);
   const std::string listen_port = conf.get(std::string("port"));
-  log.write("listen_port", listen_port);
+  log_obj.write("listen_port", listen_port);
   const std::string docker_port = conf.get(std::string("docker_port"));
-  log.write("docker_port", docker_port);
+  log_obj.write("docker_port", docker_port);
   const std::string docker_host = conf.get(std::string("docker_host"));
-  log.write("docker_host", docker_host);
+  log_obj.write("docker_host", docker_host);
   container container_server(docker_host, docker_port);
   while (true) {
     tcpserver server(listen_port);
-    log.write("listening");
+    log_obj.write("listening");
     server.accept();
-    log.write("master connected");
+    log_obj.write("master connected");
     std::string s = server.read();
     json json_object(s);
     auto json_map = json_object.get_map();
@@ -51,9 +51,9 @@ int main(int argc, char **argv) {
       server.write("OK");
       break;
     } else {
-      log.write("received: ", s);
+      log_obj.write("received: ", s);
     }
   }
-  log.write("exiting");
+  log_obj.write("exiting");
   return 0;
 }
