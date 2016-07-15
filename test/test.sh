@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-cd build
-./build.sh || exit
-cd ../test
-../build/master/master
+pwd
+DATE=$(date)
+git add *
+git commit -m "DATE"
+git push
+ssh pi /home/rusik/build.sh || exit
