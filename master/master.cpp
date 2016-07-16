@@ -8,7 +8,7 @@ master::master() : server_port(conf.get(std::string("port"))) {
 
 int master::listen() {
   while (true) {
-    tcpserver server(server_port);
+    tcpserver server(this->server_port);
     log_obj.write("listening");
     server.accept();
     log_obj.write("client connect");
