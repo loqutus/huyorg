@@ -7,8 +7,7 @@
 
 class tcpserver {
  public:
-  tcpserver(std::string port = std::string("9999"),
-            std::string host = std::string("::1"));
+  tcpserver(std::string host = std::string("::1"), std::string port = std::string("9999"));
   ~tcpserver();
   int accept();
   std::string read();

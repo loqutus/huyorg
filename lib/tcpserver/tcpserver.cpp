@@ -1,9 +1,9 @@
 #include "tcpserver.h"
 
-tcpserver::tcpserver(std::string port, std::string host)
+tcpserver::tcpserver(std::string host, std::string port)
     : endpoint(boost::asio::ip::tcp::endpoint(
           boost::asio::ip::address::from_string(host.c_str()),
-          boost::lexical_cast<unsigned short>(port))),
+          boost::lexical_cast<unsigned short>(port.c_str()))),
       acceptor(boost::asio::ip::tcp::acceptor(io_service, endpoint)),
       socket(boost::asio::ip::tcp::socket(io_service)) {}
 
@@ -15,7 +15,7 @@ int tcpserver::accept() {
 }
 
 std::string tcpserver::read() {
-  std::array<char, 1048576> buf;
+  static std::array<char, 1048576> buf;
   boost::system::error_code error;
   size_t len = socket.read_some(boost::asio::buffer(buf), error);
   if (error == boost::asio::error::eof)

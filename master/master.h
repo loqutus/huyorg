@@ -10,6 +10,7 @@
 
 class master {
   const std::string server_port;
+  const std::string server_host;
 
  public:
   master();

@@ -1,14 +1,15 @@
 #include "master.h"
 
-master::master() : server_port(conf.get(std::string("port"))) {
+master::master() : server_port(conf.get(std::string("port"))), server_host(conf.get(std::string("host"))) {
   log_obj.write("starting master");
   log_obj.write("config: ../master/master.conf");
   log_obj.write("port: ", server_port);
+  log_obj.write("host: ", server_host);
 }
 
 int master::listen() {
   while (true) {
-    tcpserver server(this->server_port);
+    tcpserver server(this->server_host, this->server_port);
     log_obj.write("listening");
     server.accept();
     log_obj.write("client connect");
