@@ -5,7 +5,7 @@ int main(int argc, char **argv) {
   tcpclient client(options.get("host"), options.get("port"));
   read_file file(options.get("json"));
   std::string file_str = file.read();
-  client.write(file_str);
-  std::cout << client.read() << std::endl;
+  client.write_string(file_str);
+  std::cout << client.read_string() << std::endl;
   return 0;
 }

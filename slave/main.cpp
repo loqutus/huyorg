@@ -16,9 +16,8 @@ int main(int argc, char **argv) {
   while (true) {
     tcpserver server(listen_port);
     log_obj.write("listening");
-    server.accept();
+    std::string s = server.read_string();
     log_obj.write("master connected");
-    std::string s = server.read();
     json json_object(s);
     auto json_map = json_object.get_map();
     std::string action = json_map["action"];
@@ -31,24 +30,24 @@ int main(int argc, char **argv) {
       std::string container_id =
           container_server.run_container(container_image, container_command);
       log_obj.write("id", container_id);
-      server.write(container_id);
+      server.write_string(container_id);
     } else if (action == "get_containers") {
       log_obj.write("get_containers");
       auto containers_list = container_server.get_containers();
       json json_containers_list(containers_list);
       auto containers_list_str = json_containers_list.get_string_from_list();
       log_obj.write(containers_list_str);
-      server.write(containers_list_str);
+      server.write_string(containers_list_str);
     } else if (action == "destroy_container") {
       log_obj.write("destroy container");
       auto container_id = json_map["id"];
       auto container_destroy_answer =
           container_server.destroy_container(container_id);
       log_obj.write(container_destroy_answer);
-      server.write(container_destroy_answer);
+      server.write_string(container_destroy_answer);
     } else if (action == "stop") {
       log_obj.write("stop");
-      server.write("OK");
+      server.write_string("OK");
       break;
     } else {
       log_obj.write("received: ", s);

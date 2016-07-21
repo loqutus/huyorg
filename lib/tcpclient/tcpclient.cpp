@@ -1,25 +1,26 @@
 #include "tcpclient.h"
 
-tcpclient::tcpclient(std::string host, std::string port)
-    : socket(boost::asio::ip::tcp::socket(aios)) {
-  boost::asio::ip::tcp::resolver resolver(aios);
-  boost::asio::ip::tcp::resolver::iterator endpoint = resolver.resolve(
-      boost::asio::ip::tcp::resolver::query(host.c_str(), port.c_str()));
-  boost::asio::connect(socket, endpoint);
+tcpclient::tcpclient(std::string host, std::string port):
+host(host), port(port){
 }
 
-int tcpclient::write(std::string message) {
-  boost::asio::write(socket, boost::asio::buffer(message));
-  return 0;
+bool tcpclient::write_string(std::string message) {
+    this->network_stream.expires_from_now(boost::posix_time::seconds(60));
+    this->network_stream.connect(host, port);
+    std::string answer;
+	if(!this->network_stream)
+		return false;
+	this->network_stream << message;
+	this->network_stream.flush();
+    this->network_stream >> answer;
+    if(answer!=std::string("OK"))
+        return false;
+    return true;
 }
 
-std::string tcpclient::read() {
-  std::array<char, 1048576> buf;
-  boost::system::error_code error;
-  size_t len = socket.read_some(boost::asio::buffer(buf), error);
-  if (error == boost::asio::error::eof)
-    return std::string(buf.data());
-  else if (error)
-    throw boost::system::system_error(error);
-  return std::string(buf.data());
+
+std::string tcpclient::read_string() {
+	std::string read_data;
+	this->network_stream >> read_data;
+	return read_data;
 }
