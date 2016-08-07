@@ -13,7 +13,7 @@ master::master()
 int master::listen()
 {
     while (true) {
-        tcpserver server(this->server_host, this->server_port);
+        tcpserver server(server_host, server_port);
         log_obj.write("listening");
         std::string s = server.read_string();
         log_obj.write("client connect");
@@ -21,7 +21,7 @@ int master::listen()
         std::unordered_map<std::string, std::string> json_map = json_object.get_map();
         std::string action = json_map[std::string("action")];
         log_obj.write("client action:", action);
-        std::string action_string = this->do_action(json_map);
+        std::string action_string = do_action(json_map);
         if (action_string == "exit") {
             return 0;
         }
