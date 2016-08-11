@@ -17,6 +17,7 @@
     - libboost-all-dev
     - git
     - cmake
+  tags: packages
 
 - name: pi names in hosts
   lineinfile: dest=/etc/hosts line={{item}}
@@ -26,32 +27,41 @@
     - 192.168.0.3 pi3
     - 192.168.0.4 pi4
     - 192.168.0.5 pi5
+  tags: hosts
 
 - name: copy sudoers file
   copy: src=sudoers dest=/etc/sudoers force=yes mode=0440
+  tags: sudoers
 
 - name: copy burn.sh
   copy: src=burn.sh dest=/usr/local/bin/burn.sh mode=755 owner=root
+  tags: burn
 
 - name: copy temp.sh
   copy: src=temp.sh dest=/usr/local/bin/temp.sh mode=755 owner=root
+  tags: temp
 
 - name: copy distcc hosts file
   copy: src=distcc_hosts dest=/etc/distcc/hosts
   register: distcc_hosts
+  tags: distcc
 
 - name: copy distcc default file
   template: src=distcc_default dest=/etc/default/distcc
   register: distcc_default
+  tags: distcc
 
 - name: restart distcc on hosts or default change
   service: name=distcc state=restarted
   when: distcc_hosts.changed or distcc_default.changed
+  tags: distcc
 
 - name: ensure distcc is started and enabled
   service: name=distcc state=started enabled=yes
+  tags: distcc
 
 - name: dist-upgrade
   apt: update_cache=yes upgrade=dist
+  tags: upgrade
 
 

@@ -7,7 +7,6 @@ fi
 for i in $(ls | grep -v build.sh); do
 	rm -Rf ./$i
 done
-rm master.log 2>&1 > /dev/null
 export CXX="distcc-pump clang++" 
 #export CXX="/usr/bin/c++" 
 export CC="distcc-pump clang" 

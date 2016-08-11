@@ -4,6 +4,7 @@ set -x
 cd ..
 #./format.sh
 cd build
+rm -f master.log
 ./build.sh > /dev/null
 killall -9 master || true
 killall -9 client || true

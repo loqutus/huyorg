@@ -6,7 +6,7 @@
 #
 # STARTDISTCC="true"
 
-STARTDISTCC="yes"
+STARTDISTCC="true"
 
 #
 # Which networks/hosts should be allowed to connect to the daemon?
