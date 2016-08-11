@@ -10,6 +10,13 @@
     - lsb-release
     - gdb
     - cpuburn
+    - build-essential
+    - clang
+    - distcc
+    - distcc-pump
+    - libboost-all-dev
+    - git
+    - cmake
 
 - name: pi names in hosts
   lineinfile: dest=/etc/hosts line={{item}}
@@ -29,6 +36,22 @@
 - name: copy temp.sh
   copy: src=temp.sh dest=/usr/local/bin/temp.sh mode=755 owner=root
 
+- name: copy distcc hosts file
+  copy: src=distcc_hosts dest=/etc/distcc/hosts
+  register: distcc_hosts
+
+- name: copy distcc default file
+  template: src=distcc_default dest=/etc/default/distcc
+  register: distcc_default
+
+- name: restart distcc on hosts or default change
+  service: name=distcc state=restarted
+  when: distcc_hosts.changed or distcc_default.changed
+
+- name: ensure distcc is started and enabled
+  service: name=distcc state=started enabled=yes
+
 - name: dist-upgrade
   apt: update_cache=yes upgrade=dist
+
 

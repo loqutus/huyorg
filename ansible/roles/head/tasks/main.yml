@@ -7,7 +7,6 @@
       - openvpn
       - gdb
       - lldb
-      - build-essential
       - ipython
       - python3
       - ipython3
@@ -17,11 +16,9 @@
       - python3-dev
       - libncurses5-dev
       - mc
-      - git
       - devscripts
       - dh-make
       - telnet
-      - libboost-all-dev
       - yamllint
       - valgrind
       - tcpdump

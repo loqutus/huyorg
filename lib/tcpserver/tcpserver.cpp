@@ -11,7 +11,11 @@ std::string tcpserver::read_string() {
   boost::system::error_code ec;
   this->acceptor.accept(*stream.rdbuf(), ec);
   std::string s;
-  std::getline(stream, s);
+  char buffer[4096];
+  while (stream.read(buffer, sizeof(buffer))) {
+    s.append(buffer, sizeof(buffer));
+  }
+  s.append(buffer, stream.gcount());
   return s;
 }
 

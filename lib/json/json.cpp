@@ -56,7 +56,6 @@ std::unordered_map<std::string, std::string> json::get_map() {
     }
     return *map;
   } catch (...) {
-//return std::unordered_map<std::string, std::string>(std::string("1"), std::string("2"));
     return std::unordered_map<std::string, std::string>();
   }
 }

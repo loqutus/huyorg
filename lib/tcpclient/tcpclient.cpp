@@ -10,11 +10,13 @@ bool tcpclient::write_string(std::string message) {
   if (!network_stream) return false;
   network_stream << message;
   network_stream.flush();
+  network_stream.close();
   return true;
 }
 
 std::string tcpclient::read_string() {
   std::string read_data;
   network_stream >> read_data;
+  network_stream.close();
   return read_data;
 }
