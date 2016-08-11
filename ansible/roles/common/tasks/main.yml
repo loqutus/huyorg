@@ -1,0 +1,26 @@
+---
+- name: install packages
+  apt: name={{item}} state=installed update_cache=yes
+  with_items:
+    - nload
+    - ntp
+    - atop
+    - lxc
+    - linux-tools-generic
+    - lsb-release
+    - gdb
+
+- name: pi names in hosts
+  lineinfile: dest=/etc/hosts line={{item}}
+  with_items:
+    - 192.168.0.1 pi1
+    - 192.168.0.2 pi2
+    - 192.168.0.3 pi3
+    - 192.168.0.4 pi4
+    - 192.168.0.5 pi5
+
+- name: copy sudoers file
+  copy: src=sudoers dest=/etc/sudoers force=yes mode=0440
+
+- name: dist-upgrade
+  apt: update_cache=yes upgrade=dist
