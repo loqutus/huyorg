@@ -49,12 +49,14 @@ std::unordered_map<std::string, std::string> json::get_map() {
     boost::property_tree::ptree ptree;
     std::stringstream ss;
     ss << input_string;
+    ss.flush();
     boost::property_tree::read_json(ss, ptree);
     BOOST_FOREACH (boost::property_tree::ptree::value_type& v, ptree) {
       map->at(v.first) = v.second.data();
     }
     return *map;
   } catch (...) {
+//return std::unordered_map<std::string, std::string>(std::string("1"), std::string("2"));
     return std::unordered_map<std::string, std::string>();
   }
 }

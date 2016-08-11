@@ -15,10 +15,11 @@ int master::listen() {
     log_obj.write("listening");
     std::string s = server.read_string();
     log_obj.write("client connect");
-    log_obj.write(s);
     json json_object(s);
     std::unordered_map<std::string, std::string> json_map =
         json_object.get_map();
+    int i = json_map.size();
+    log_obj.write(std::to_string(i));
     std::string action = json_map[std::string("action")];
     log_obj.write("client action:", action);
     std::string action_string = do_action(json_map);

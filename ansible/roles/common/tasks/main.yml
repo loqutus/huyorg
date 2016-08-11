@@ -9,6 +9,7 @@
     - linux-tools-generic
     - lsb-release
     - gdb
+    - cpuburn
 
 - name: pi names in hosts
   lineinfile: dest=/etc/hosts line={{item}}
@@ -22,5 +23,12 @@
 - name: copy sudoers file
   copy: src=sudoers dest=/etc/sudoers force=yes mode=0440
 
+- name: copy burn.sh
+  copy: src=burn.sh dest=/usr/local/bin/burn.sh mode=755 owner=root
+
+- name: copy temp.sh
+  copy: src=temp.sh dest=/usr/local/bin/temp.sh mode=755 owner=root
+
 - name: dist-upgrade
   apt: update_cache=yes upgrade=dist
+
