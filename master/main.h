@@ -1,10 +1,10 @@
 #ifndef PROJECT_MAIN_H
 #define PROJECT_MAIN_H
 
-#include "master.h"
-#include "watcher.h"
 #include <iostream>
 #include <thread>
+#include "master.h"
+#include "watcher.h"
 
 int main(int argc, char** argv);
 
