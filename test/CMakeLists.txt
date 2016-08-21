@@ -1,0 +1,5 @@
+project(test CXX)
+add_subdirectory(/usr/src/gtest ${CMAKE_CURRENT_BINARY_DIR}/libgtest )
+add_executable(json_test json_test.cpp)
+target_link_libraries(json_test gtest gtest_main json)
+add_test(NAME json_test COMMAND json_test)
