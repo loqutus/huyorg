@@ -1,12 +1,12 @@
 #include "json.h"
 
-json::json(std::string input) { this->input_string = input; }
+json::json(std::string input) { input_string = input; }
 
 json::json(std::unordered_map<std::string, std::string> input) {
   this->input_map = input;
 }
 
-json::json(std::list<std::string> input) { this->input_list = input; }
+json::json(std::list<std::string> input) { input_list = input; }
 
 json::~json() { input_string.clear(); }
 
@@ -43,21 +43,16 @@ std::string json::get_string_from_list() {
 }
 
 std::unordered_map<std::string, std::string> json::get_map() {
-  try {
-    std::unordered_map<std::string, std::string>* map =
-        new std::unordered_map<std::string, std::string>;
-    boost::property_tree::ptree ptree;
-    std::stringstream ss;
-    ss << input_string;
-    ss.flush();
-    boost::property_tree::read_json(ss, ptree);
-    BOOST_FOREACH (boost::property_tree::ptree::value_type& v, ptree) {
-      map->at(v.first) = v.second.data();
-    }
-    return *map;
-  } catch (...) {
-    return std::unordered_map<std::string, std::string>();
+  std::unordered_map<std::string, std::string> map;
+  boost::property_tree::ptree ptree;
+  std::stringstream ss;
+  ss.write(input_string.c_str(), input_string.length());
+  ss.flush();
+  boost::property_tree::read_json(ss, ptree);
+  BOOST_FOREACH (boost::property_tree::ptree::value_type& v, ptree) {
+    map[v.first] = v.second.data();
   }
+  return map;
 }
 
 std::list<std::string> json::get_list() {

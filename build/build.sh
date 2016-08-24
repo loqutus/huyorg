@@ -13,11 +13,11 @@ export CXX="clang++"
 #export CC="distcc clang" 
 export CC="clang" 
 #export CC="/usr/bin/cc" 
-cmake -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_BUILD_TYPE=Debug ..
-#cmake DCMAKE_BUILD_TYPE=Debug ..
+#cmake -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_BUILD_TYPE=Debug ..
+cmake DCMAKE_BUILD_TYPE=Debug ..
 #cmake DCMAKE_BUILD_TYPE=Release ..
 #make -j 4 V=1
 make -j 4
-make -j 4 test
+#make -j 4 test
 #distcc-pump make -j 20
 exit $?

@@ -24,4 +24,3 @@
       - tcpdump
       - clang-format
       - libgtest-dev
-      - cgdb

@@ -17,6 +17,8 @@
     - libboost-all-dev
     - git
     - cmake
+    - cgdb
+    - ncdu
   tags: packages
 
 - name: pi names in hosts
