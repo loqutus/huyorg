@@ -1,6 +1,6 @@
 #include "json.h"
 
-json::json(std::string input) { input_string = input; }
+json::json(std::string input) { this->input_string = input; }
 
 json::json(std::unordered_map<std::string, std::string> input) {
   this->input_map = input;
@@ -15,7 +15,7 @@ std::string json::get_string_from_map() {
     return std::string("{}");
   }
   std::string str("{");
-  for (auto kv : input_map) {
+  for (auto kv : this->input_map) {
     str += " \"";
     str += kv.first;
     str += "\" : \"";
@@ -28,7 +28,7 @@ std::string json::get_string_from_map() {
 }
 
 std::string json::get_string_from_list() {
-  if (input_list.empty()) {
+  if (this->input_list.empty()) {
     return std::string("[]");
   }
   std::string str("[");

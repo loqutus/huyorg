@@ -17,7 +17,7 @@
 
 class watcher {
  public:
-  int watch();
+  void watch();
 };
 
 #endif  // PROJECT_WATCHER_H

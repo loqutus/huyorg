@@ -11,6 +11,7 @@ killall -9 client || true
 ./master/master &
 sleep 1
 ./client/client --json ../test/add_slave.json
+./client/client --json ../test/add_pod.json
 sleep 1
 cat master.log
 killall -9 master || true

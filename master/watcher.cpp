@@ -1,6 +1,6 @@
 #include "watcher.h"
 
-int watcher::watch() {
+void watcher::watch() {
   while (true) {
     auto pods = store.get_pods_vector();
     for (auto pod_name : pods) {

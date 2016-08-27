@@ -10,8 +10,10 @@
 class tcpclient {
  public:
   tcpclient(std::string host, std::string port);
-  bool write_string(std::string message);
-  std::string read_string();
+  void connect(int timeout = 60);
+  bool write_string(std::string message, int timeout = 60);
+  std::string read_string(int timeout = 60);
+  int close();
 
  private:
   boost::asio::ip::tcp::iostream network_stream;

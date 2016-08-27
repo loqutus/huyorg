@@ -3,20 +3,29 @@
 tcpclient::tcpclient(std::string host, std::string port)
     : host(host), port(port) {}
 
-bool tcpclient::write_string(std::string message) {
-  network_stream.expires_from_now(boost::posix_time::seconds(60));
-  network_stream.connect(host, port);
+void tcpclient::connect(int timeout) {
+  this->network_stream.expires_from_now(boost::posix_time::seconds(timeout));
+  this->network_stream.connect(host, port);
+}
+
+bool tcpclient::write_string(std::string message, int timeout) {
+  // this->network_stream.expires_from_now(boost::posix_time::seconds(timeout));
   std::string answer;
-  if (!network_stream) return false;
-  network_stream << message;
-  network_stream.flush();
-  network_stream.close();
+  if (!this->network_stream) return false;
+  this->network_stream << message;
+  this->network_stream.flush();
   return true;
 }
 
-std::string tcpclient::read_string() {
+std::string tcpclient::read_string(int timeout) {
+  this->network_stream.expires_from_now(boost::posix_time::seconds(timeout));
   std::string read_data;
-  network_stream >> read_data;
-  network_stream.close();
+  if (!this->network_stream) return std::string("");
+  this->network_stream >> read_data;
   return read_data;
+}
+
+int tcpclient::close() {
+  this->network_stream.close();
+  return 0;
 }
