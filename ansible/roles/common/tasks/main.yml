@@ -22,3 +22,17 @@
   copy: src=sudoers dest=/etc/sudoers force=yes mode=0440
   tags: sudoers
 
+- name: remove swap file
+  lineinfile: dest=/etc/fstab state=absent line='/var/swap none swap sw 0 0'
+  register: swap_fstab
+
+- name: disable swap
+  shell: swapoff -a
+  when: swap_fstab.changed
+
+- name: rm swap
+  file: dest=/var/swap state=absent force=yes
+  when: swap_fstab.changed
+
+- name: copy vimrc
+  copy: src=vimrc dest=/home/rusik/.vimrc

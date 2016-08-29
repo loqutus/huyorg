@@ -1,0 +1,6 @@
+set number
+set tags=.ctags
+set expandtab
+set ts=2 sw=2 expandtab
+syntax on
+filetype on
