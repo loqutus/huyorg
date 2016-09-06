@@ -43,16 +43,24 @@ std::string json::get_string_from_list() {
 }
 
 std::unordered_map<std::string, std::string> json::get_map() {
-  std::unordered_map<std::string, std::string> map;
-  boost::property_tree::ptree ptree;
-  std::stringstream ss;
-  ss.write(input_string.c_str(), input_string.length());
-  ss.flush();
-  boost::property_tree::read_json(ss, ptree);
-  BOOST_FOREACH (boost::property_tree::ptree::value_type& v, ptree) {
-    map[v.first] = v.second.data();
+  try {
+    std::unordered_map<std::string, std::string> map;
+    boost::property_tree::ptree ptree;
+    std::stringstream ss;
+    ss.write(this->input_string.c_str(), this->input_string.length());
+    ss.flush();
+    boost::property_tree::read_json(ss, ptree);
+    BOOST_FOREACH (boost::property_tree::ptree::value_type& v, ptree) {
+      map[v.first] = v.second.data();
+    }
+    return map;
+  } catch (...) {
+    return std::unordered_map<std::string, std::string>();
   }
-  return map;
+}
+
+std::string json::get_key_from_map(std::string key) {
+  return this->get_map()[key];
 }
 
 std::list<std::string> json::get_list() {

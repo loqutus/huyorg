@@ -6,30 +6,29 @@ tcpserver::tcpserver(std::string host, std::string port)
           boost::lexical_cast<unsigned short>(port))),
       acceptor(boost::asio::ip::tcp::acceptor(io_service, endpoint)) {}
 
-void tcpserver::listen() {
-  this->acceptor.accept(*this->stream.rdbuf(), this->ec);
-}
-
 std::string tcpserver::read_string(int timeout) {
-  this->stream.expires_from_now(boost::posix_time::seconds(timeout));
+  boost::asio::ip::tcp::iostream stream;
+  boost::system::error_code ec;
+  stream.expires_from_now(boost::posix_time::seconds(timeout));
+  this->acceptor.accept(*stream.rdbuf(), ec);
+  char buffer[1024];
   std::string s;
-  char buffer[4096];
-  while (this->stream.read(buffer, sizeof(buffer))) {
+  while (stream.read(buffer, sizeof(buffer))) {
     s.append(buffer, sizeof(buffer));
   }
-  s.append(buffer, stream.gcount());
+  //stream >> s;
+  stream.close();
   return s;
 }
 
 bool tcpserver::write_string(std::string message, int timeout) {
-  this->stream.expires_from_now(boost::posix_time::seconds(timeout));
-  this->stream.write(message.c_str(), sizeof(message.c_str()));
+  boost::asio::ip::tcp::iostream stream;
+  boost::system::error_code ec;
+  stream.expires_from_now(boost::posix_time::seconds(timeout));
+  this->acceptor.accept(*stream.rdbuf(), ec);
+  stream.write(message.c_str(), sizeof(message.c_str()));
   // this->stream << message;
-  this->stream.flush();
+  stream.flush();
+  stream.close();
   return true;
-}
-
-int tcpserver::close() {
-  this->stream.close();
-  return 0;
 }

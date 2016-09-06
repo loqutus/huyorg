@@ -1,7 +1,7 @@
 #include "main.h"
 
 storage store;
-confreader conf("../master/master.conf");
+confreader conf("../test/master.conf");
 logging log_obj(conf.get("log"));
 
 void run_master() {
@@ -11,7 +11,7 @@ void run_master() {
 
 void run_watcher() {
   watcher Watcher;
-  Watcher.watch();
+  Watcher.watch(conf.get_int("sleep"));
 }
 
 int main(int argc, char** argv) {

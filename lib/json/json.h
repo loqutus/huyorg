@@ -21,6 +21,7 @@ class json {
   json(std::list<std::string> input);
   ~json();
   std::unordered_map<std::string, std::string> get_map();
+  std::string get_key_from_map(std::string key);
   std::list<std::string> get_list();
   std::list<std::unordered_map<std::string, std::string>> get_list_of_maps();
   std::string get_string_from_map();

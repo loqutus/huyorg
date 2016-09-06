@@ -17,7 +17,7 @@
 
 class watcher {
  public:
-  void watch();
+  void watch(int sleep_time = 60);
 };
 
 #endif  // PROJECT_WATCHER_H

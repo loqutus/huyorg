@@ -5,7 +5,8 @@ int main(int argc, char** argv) {
   confreader conf(conf_file);
   logging log_obj(conf.get(std::string("log")));
   log_obj.write("starting slave");
-  log_obj.write("read config file", conf_file);
+  const std::string listen_host = conf.get(std::string("host"));
+  log_obj.write("listen_host", listen_host);
   const std::string listen_port = conf.get(std::string("port"));
   log_obj.write("listen_port", listen_port);
   const std::string docker_port = conf.get(std::string("docker_port"));
@@ -14,7 +15,7 @@ int main(int argc, char** argv) {
   log_obj.write("docker_host", docker_host);
   container container_server(docker_host, docker_port);
   while (true) {
-    tcpserver server(listen_port);
+    tcpserver server(listen_host, listen_port);
     log_obj.write("listening");
     std::string s = server.read_string();
     log_obj.write("master connected");

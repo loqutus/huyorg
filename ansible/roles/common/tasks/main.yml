@@ -4,8 +4,10 @@
   with_items:
     - ntp
     - atop
-    - cpuburn
     - docker.io
+    - libboost-program-options1.58.0
+    - libboost-system1.58.0
+    - libboost-thread1.58.0
   tags: packages
 
 - name: pi names in hosts
@@ -36,3 +38,11 @@
 
 - name: copy vimrc
   copy: src=vimrc dest=/home/rusik/.vimrc
+
+- name: copy docker defaults
+  copy: src=docker dest=/etc/default/docker
+  register: docker_file
+
+- name: restart docker on defaults file change
+  service: name=docker state=restarted
+  when: docker_file.changed

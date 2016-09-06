@@ -13,6 +13,7 @@ class confreader {
   ~confreader();
 
   std::string get(std::string key);
+  int get_int(std::string key);
 
  private:
   std::ifstream conffile;

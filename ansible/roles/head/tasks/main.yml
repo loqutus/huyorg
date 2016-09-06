@@ -29,6 +29,8 @@
       - clang-format
       - libgtest-dev
       - iptables-persistent
+      - libc++-dev
+      - libstdc++6-5-dbg-armhf-cross
 
 - name: enable ip_forward
   lineinfile: dest=/etc/sysctl.conf state=present line='net.ipv4.ip_forward = 1'

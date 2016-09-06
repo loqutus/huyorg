@@ -4,7 +4,7 @@ master::master()
     : server_port(conf.get(std::string("port"))),
       server_host(conf.get(std::string("host"))) {
   log_obj.write("starting master");
-  log_obj.write("config: ../master/master.conf");
+  log_obj.write("config: ../test/master.conf");
   log_obj.write("port: ", server_port);
   log_obj.write("host: ", server_host);
 }
@@ -12,18 +12,19 @@ master::master()
 int master::listen() {
   while (true) {
     tcpserver server(server_host, server_port);
-    server.listen();
     log_obj.write("listening");
     std::string s = server.read_string();
     log_obj.write("client connect");
     json json_object(s);
-    std::unordered_map<std::string, std::string> json_map =
-        json_object.get_map();
-    std::string action = json_map[std::string("action")];
+    std::string action = json_object.get_key_from_map(std::string("action"));
+    auto json_map = json_object.get_map();
+    if (json_map.empty()) {
+      log_obj.write("json is empty");
+      continue;
+    }
     log_obj.write("client action:", action);
     std::string action_string = do_action(json_map);
-    // server.write_string(action_string);
-    server.close();
+    server.write_string(action_string);
     log_obj.write(action_string);
   }
 }

@@ -27,3 +27,5 @@ std::string confreader::get(std::string key) {
     return conf_map[std::string(key)];
   }
 }
+
+int confreader::get_int(std::string key) { return std::stoi(this->get(key)); }

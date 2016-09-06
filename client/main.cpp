@@ -4,10 +4,9 @@ int main(int argc, char** argv) {
   optparse options(argc, argv);
   read_file file(options.get("json"));
   tcpclient client(options.get("host"), options.get("port"));
-  client.connect();
   std::string file_str = file.read();
+  std::cout << file_str << std::endl;
   client.write_string(file_str);
-  // std::cout << client.read_string() << std::endl;
-  client.close();
+  std::cout << client.read_string() << std::endl;
   return 0;
 }
