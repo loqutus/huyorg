@@ -18,7 +18,7 @@ sudo netstat -tulpn | egrep -e '9999|8888'
 ./client/client --json ../test/add_slave.json
 sleep 1
 ./client/client --json ../test/add_pod.json
-sleep 10
+sleep 1
 cat master.log
 cat slave.log
 sudo docker ps -a

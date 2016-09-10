@@ -11,12 +11,12 @@ std::string tcpserver::read_string(int timeout) {
   boost::system::error_code ec;
   stream.expires_from_now(boost::posix_time::seconds(timeout));
   this->acceptor.accept(*stream.rdbuf(), ec);
-  char buffer[1024];
+  char buffer[1];
   std::string s;
   while (stream.read(buffer, sizeof(buffer))) {
     s.append(buffer, sizeof(buffer));
   }
-  //stream >> s;
+  s.append(buffer, sizeof(buffer));
   stream.close();
   return s;
 }
