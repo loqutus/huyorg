@@ -21,6 +21,6 @@ sleep 1
 sleep 1
 cat master.log
 cat slave.log
-sudo docker ps -a
+sudo docker ps 
 killall -9 master || true
 killall -9 client || true
