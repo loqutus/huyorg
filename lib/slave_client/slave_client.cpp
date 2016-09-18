@@ -17,7 +17,7 @@ std::list<std::string> slave_client::get_containers() {
 std::string slave_client::run_container(std::string image,
                                         std::string command) {
   std::string request = "";
-  request += "{\"action\": \"run_container\", \"image\" : \"";
+  request += "{\"action\":\"run_container\",\"image\":\"";
   request += image;
   request += "\",\"command\":\"";
   request += command;
@@ -30,7 +30,7 @@ std::string slave_client::run_container(std::string image,
 
 std::string slave_client::destroy_container(std::string container_id) {
   std::string request = "";
-  request += "{\"action\": \"destroy_container\", \"container_id\" : \"";
+  request += "{\"action\":\"destroy_container\",\"container_id\":\"";
   request += container_id;
   request += "\"}";
   tcpclient tcp_client(this->slave_host, this->slave_port);
