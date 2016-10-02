@@ -5,7 +5,8 @@
 #include "../tcpclient/tcpclient.h"
 
 class httpclient {
-  tcpclient tcp_client;
+  std::string host;
+  std::string port;
 
  public:
   httpclient(std::string host, std::string port);

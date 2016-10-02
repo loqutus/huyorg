@@ -26,7 +26,7 @@ bool tcpserver::write_string(std::string message, int timeout) {
   boost::system::error_code ec;
   stream.expires_from_now(boost::posix_time::seconds(timeout));
   this->acceptor.accept(*stream.rdbuf(), ec);
-  stream.write(message.c_str(), sizeof(message.c_str()));
+  stream.write(message.c_str(), sizeof(message.c_str()) + 1);
   // this->stream << message;
   stream.flush();
   stream.close();

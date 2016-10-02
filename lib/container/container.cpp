@@ -1,9 +1,10 @@
 #include "container.h"
 
 container::container(std::string host, std::string port)
-    : http_client(host, port) {}
+    : host(host), port(port) {}
 
 std::list<std::string> container::get_containers() {
+  httpclient http_client(this->host, this->port);
   std::string json_string = http_client.get(std::string("/containers/json"));
   json json_object(json_string);
   auto list_of_maps = json_object.get_list_of_maps();
@@ -15,6 +16,7 @@ std::list<std::string> container::get_containers() {
 }
 
 std::string container::run_container(std::string image, std::string command) {
+  httpclient http_client(this->host, this->port);
   std::string body;
   body += "{ \"Image\" : \"";
   body += image;
@@ -25,10 +27,12 @@ std::string container::run_container(std::string image, std::string command) {
   json json_object(response);
   auto map = json_object.get_map();
   std::string container_id = map["Id"];
-  return container_id;
+  // return container_id;
+  return response;
 }
 
 std::string container::destroy_container(std::string container_id) {
+  httpclient http_client(this->host, this->port);
   std::string body("");
   std::string url = "/containers/";
   url += container_id;

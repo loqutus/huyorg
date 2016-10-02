@@ -8,7 +8,8 @@
 #include "../json/json.h"
 
 class container {
-  httpclient http_client;
+  std::string host;
+  std::string port;
 
  public:
   container(std::string host, std::string port);

@@ -11,8 +11,8 @@ void watcher::watch(int sleep_time) {
         log_obj.write("WATCHER: slave", slave_name);
         auto slave = store.get_slave(slave_name);
         slave_client slaveclient(slave["slave_host"], slave["slave_port"]);
-        auto container_json = slaveclient.run_container(pod_params["pod_image"],
-                                  pod_params["pod_command"]);
+        auto container_json = slaveclient.run_container(
+            pod_params["pod_image"], pod_params["pod_command"]);
         log_obj.write("WATCHER: ", container_json);
       }
     }
