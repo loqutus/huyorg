@@ -31,10 +31,8 @@ int main(int argc, char** argv) {
       log_obj.write("SLAVE: image:", container_image);
       std::string container_command = json_map["command"];
       log_obj.write("SLAVE: command:", container_command);
-      log_obj.write("1");
       std::string container_id =
           container_server.run_container(container_image, container_command);
-      log_obj.write("2");
       log_obj.write("SLAVE: container id", container_id);
       server.write_string(container_id);
     } else if (action == "get_containers") {

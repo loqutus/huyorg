@@ -8,6 +8,7 @@
     - libboost-program-options1.58.0
     - libboost-system1.58.0
     - libboost-thread1.58.0
+    - etcd
   tags: packages
 
 - name: pi names in hosts
