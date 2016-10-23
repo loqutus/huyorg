@@ -18,10 +18,10 @@ sudo netstat -tulpn | egrep -e '9999|8888'
 ./client/client --json ../test/add_slave.json
 sleep 1
 ./client/client --json ../test/add_pod.json
-sleep 60
+sleep 10
 cat master.log
 cat slave.log
-sudo docker ps 
+sudo docker ps -a | grep -v 'CONTAINER' |  head -n 1
 killall -9 master || true
 killall -9 slave || true
 killall -9 client || true

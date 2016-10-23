@@ -18,17 +18,17 @@ std::list<std::string> container::get_containers() {
 std::string container::run_container(std::string image, std::string command) {
   httpclient http_client(this->host, this->port);
   std::string body;
-  body += "{ \"Image\" : \"";
+  body += "{\"image\":\"";
   body += image;
-  body += "\", \"Cmd\" : [ \"";
+  body += "\",\"command\":\"";
   body += command;
-  body += "\" ] }";
+  body += "\"}\n";
   auto response = http_client.post("/containers/create", body);
   json json_object(response);
   auto map = json_object.get_map();
   std::string container_id = map["Id"];
   // return container_id;
-  return response;
+  return container_id;
 }
 
 std::string container::destroy_container(std::string container_id) {
