@@ -2,6 +2,6 @@
 	"action": "add_pod",
 	"pod_name": "sleep",
 	"pod_command": "/bin/sleep 10",
-	"pod_count": "1",
+	"pod_count": "2",
 	"pod_image": "sleep"  
 }

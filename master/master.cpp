@@ -25,7 +25,7 @@ int master::listen() {
     log_obj.write("MASTER: client action:", action);
     std::string action_string = do_action(json_map);
     server.write_string(action_string);
-    log_obj.write("MASTER", action_string);
+    log_obj.write("MASTER:", action_string);
   }
 }
 

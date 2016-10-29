@@ -32,10 +32,13 @@ std::string tcpclient::write_read_string(std::string message, int timeout) {
   if (!stream) return std::string("Fuck!");
   stream << message;
   stream.flush();
-  std::string answer;
-  stream >> answer;
-  stream.close();
-  return answer;
+  std::string temp("");
+  logging log_obj("tcpclient.log");
+  for(int i=0;i<18;i++){
+    stream >> temp;
+  }
+  log_obj.write(temp);
+  return temp;
 }
 
 

@@ -27,7 +27,6 @@ std::string container::run_container(std::string image, std::string command) {
   json json_object(response);
   auto map = json_object.get_map();
   std::string container_id = map["Id"];
-  // return container_id;
   return container_id;
 }
 

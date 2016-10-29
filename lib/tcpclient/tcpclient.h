@@ -6,6 +6,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include "../logging/logging.h"
 
 class tcpclient {
  public:

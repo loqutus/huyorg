@@ -3,6 +3,7 @@
 
 #include <string>
 #include "../tcpclient/tcpclient.h"
+#include "../logging/logging.h"
 
 class httpclient {
   std::string host;
