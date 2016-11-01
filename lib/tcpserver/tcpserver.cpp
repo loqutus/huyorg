@@ -9,14 +9,14 @@ tcpserver::tcpserver(std::string host, std::string port)
 std::string tcpserver::read_string(int timeout) {
   boost::asio::ip::tcp::iostream stream;
   boost::system::error_code ec;
-  stream.expires_from_now(boost::posix_time::seconds(timeout));
+  //stream.expires_from_now(boost::posix_time::seconds(timeout));
   this->acceptor.accept(*stream.rdbuf(), ec);
   char buffer[1];
   std::string s;
   while (stream.read(buffer, sizeof(buffer))) {
     s.append(buffer, sizeof(buffer));
   }
-  s.append(buffer, sizeof(buffer));
+  //s.append(buffer, sizeof(buffer));
   stream.close();
   return s;
 }
@@ -24,10 +24,11 @@ std::string tcpserver::read_string(int timeout) {
 bool tcpserver::write_string(std::string message, int timeout) {
   boost::asio::ip::tcp::iostream stream;
   boost::system::error_code ec;
-  stream.expires_from_now(boost::posix_time::seconds(timeout));
+  //stream.expires_from_now(boost::posix_time::seconds(timeout));
   this->acceptor.accept(*stream.rdbuf(), ec);
-  stream.write(message.c_str(), sizeof(message.c_str()) + 1);
-  // this->stream << message;
+  //stream.write(message.c_str(), sizeof(message.c_str()) + 1);
+  //stream.write(message.c_str(), sizeof(message.c_str()));
+  stream << message;
   stream.flush();
   stream.close();
   return true;

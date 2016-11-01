@@ -10,7 +10,7 @@
 
 class tcpclient {
  public:
-  tcpclient(std::string host, std::string port);
+  tcpclient(std::string host = std::string("::1"), std::string port = std::string("9999"));
   bool write_string(std::string message, int timeout = 60);
   std::string read_string(int timeout = 60);
   std::string write_read_string(std::string message, int timeout=60);
