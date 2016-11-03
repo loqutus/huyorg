@@ -18,12 +18,11 @@ int main(int argc, char** argv) {
     tcpserver server(listen_host, listen_port);
     log_obj.write("SLAVE: listening");
     std::string s = server.read_string();
-    s.pop_back();
     log_obj.write("SLAVE: master connected");
     json json_object(s);
     auto json_map = json_object.get_map();
     // std::string action = json_map["action"];
-    std::string action = json_object.get_key_from_map(std::string("action"));
+    std::string action = json_map["action"];
     log_obj.write("SLAVE: action", action);
     if (action == "run_container") {
       log_obj.write("SLAVE: run_container");
