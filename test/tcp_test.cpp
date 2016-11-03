@@ -25,7 +25,6 @@ void run_client() {
 
 TEST(Tcp, Tcptest) {
   std::thread server_thread(run_server);
-  std::this_thread::sleep_for(std::chrono::seconds(1));
   std::thread client_thread(run_client);
   server_thread.join();
   client_thread.join();

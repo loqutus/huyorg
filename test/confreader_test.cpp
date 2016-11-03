@@ -3,11 +3,11 @@
 #include <iostream>
 
 TEST(Confreader, ConfreaderGet) {
-  confreader conf("../../test/test_data/confreader_test");
-  EXPECT_EQ(std::string("value"), conf.get("key"));
+  confreader conf("../../test/master.conf");
+  EXPECT_EQ(std::string("::1"), conf.get("host"));
 }
 
 TEST(Confreader, ConfreaderGetInt) {
-  confreader conf("../../test/test_data/confreader_test");
-  EXPECT_EQ(int(8), conf.get_int("bits"));
+  confreader conf("../../test/master.conf");
+  EXPECT_EQ(int(9999), conf.get_int("port"));
 }

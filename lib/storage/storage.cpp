@@ -12,10 +12,10 @@ bool storage::is_pods_empty() { return pods_map.empty(); }
 
 bool storage::is_containers_empty() { return containers_map.empty(); }
 
-int storage::set_slave(std::string key,
-                       std::unordered_map<std::string, std::string> value) {
+bool storage::set_slave(std::string key,
+                        std::unordered_map<std::string, std::string> value) {
   this->slaves_map[key] = value;
-  return 0;
+  return true;
 }
 
 int storage::remove_slave(std::string key) {
@@ -23,10 +23,10 @@ int storage::remove_slave(std::string key) {
   return 0;
 }
 
-int storage::set_pod(std::string key,
-                     std::unordered_map<std::string, std::string> value) {
+bool storage::set_pod(std::string key,
+                      std::unordered_map<std::string, std::string> value) {
   this->pods_map[key] = value;
-  return 0;
+  return true;
 }
 
 int storage::remove_pod(std::string key) {
@@ -34,10 +34,9 @@ int storage::remove_pod(std::string key) {
   return 0;
 }
 
-int storage::set_container(std::string key,
-                           std::unordered_map<std::string, std::string> value) {
+bool storage::set_container(std::string key, std::string value) {
   this->containers_map[key] = value;
-  return 0;
+  return true;
 }
 
 std::unordered_map<std::string, std::string> storage::get_slave(
@@ -71,4 +70,40 @@ std::vector<std::string> storage::get_containers_vector() {
     containers_vector.push_back(iterator.first);
   }
   return containers_vector;
+}
+
+void storage::update_slave_minus(std::string slave_name, std::string pod_name) {
+  auto slave = this->get_slave(slave_name);
+  auto pod = this->get_pod(pod_name);
+  auto pod_cpus = std::stoi(pod["pod_cpus"]);
+  auto pod_memory = std::stoi(pod["pod_memory"]);
+  auto pod_disk = std::stoi(pod["pod_disk"]);
+  auto slave_cpus = std::stoi(slave["slave_cpus"]);
+  auto slave_memory = std::stoi(slave["slave_memory"]);
+  auto slave_disk = std::stoi(slave["slave_disk"]);
+  slave_cpus -= pod_cpus;
+  slave_memory -= pod_memory;
+  slave_disk -= pod_disk;
+  slave["cpus"] = slave_cpus;
+  slave["memory"] = slave_memory;
+  slave["disk"] = slave_disk;
+  this->set_slave(slave_name, slave);
+}
+
+void storage::update_slave_plus(std::string slave_name, std::string pod_name) {
+  auto slave = this->get_slave(slave_name);
+  auto pod = this->get_pod(pod_name);
+  auto pod_cpus = std::stoi(pod["pod_cpus"]);
+  auto pod_memory = std::stoi(pod["pod_memory"]);
+  auto pod_disk = std::stoi(pod["pod_disk"]);
+  auto slave_cpus = std::stoi(slave["slave_cpus"]);
+  auto slave_memory = std::stoi(slave["slave_memory"]);
+  auto slave_disk = std::stoi(slave["slave_disk"]);
+  slave_cpus += pod_cpus;
+  slave_memory += pod_memory;
+  slave_disk += pod_disk;
+  slave["cpus"] = slave_cpus;
+  slave["memory"] = slave_memory;
+  slave["disk"] = slave_disk;
+  this->set_slave(slave_name, slave);
 }

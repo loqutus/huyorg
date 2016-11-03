@@ -32,7 +32,7 @@ int main(int argc, char** argv) {
       log_obj.write("SLAVE: command:", container_command);
       std::string container_id =
           container_server.run_container(container_image, container_command);
-      log_obj.write("SLAVE: container id", container_id);
+      log_obj.write("SLAVE: container_id", container_id);
       server.write_string(container_id);
     } else if (action == "get_containers") {
       log_obj.write("SLAVE: get_containers");

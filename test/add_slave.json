@@ -1,5 +1,8 @@
 {
   "action": "add_slave",
   "slave_host": "pi1",
-  "slave_port": "8888" 
+  "slave_port": "8888",
+  "slave_cpus": "4",
+  "slave_memory":  "1024",
+  "slave_disk": "32"
 }
