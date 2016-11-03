@@ -8,7 +8,7 @@ void watcher::watch(int sleep_time) {
       auto pod_params = store.get_pod(pod_name);
       auto pod_count = std::stoi(pod_params["pod_count"]);
       auto slaves = store.get_slaves_vector();
-      while(pod_count > 0){
+      while (pod_count > 0) {
         for (auto slave_name : slaves) {
           log_obj.write("WATCHER: slave", slave_name);
           auto slave = store.get_slave(slave_name);

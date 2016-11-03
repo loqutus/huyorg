@@ -2,8 +2,8 @@
 #define PROJECT_HTTPCLIENT_H
 
 #include <string>
-#include "../tcpclient/tcpclient.h"
 #include "../logging/logging.h"
+#include "../tcpclient/tcpclient.h"
 
 class httpclient {
   std::string host;
