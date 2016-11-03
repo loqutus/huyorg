@@ -5,7 +5,8 @@ httpclient::httpclient(std::string host, std::string port)
 
 std::string httpclient::get(std::string url) {
   tcpclient tcp_client(this->host, this->port);
-  std::string message = std::string("GET ") + url + " HTTP/1.1\n\n";
+  std::string message = std::string("GET ") + url + " HTTP/1.1\n Host: " +
+                        this->host + ":" + this->port + "\n\n";
   auto read_message = tcp_client.write_read_string(message);
   return read_message;
 }
