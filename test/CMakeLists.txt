@@ -1,5 +1,5 @@
 project(test CXX)
-add_subdirectory(/usr/src/gtest ${CMAKE_CURRENT_BINARY_DIR}/libgtest )
+add_subdirectory(/usr/local/src/googletest/googletest/ ${CMAKE_CURRENT_BINARY_DIR}/libgtest )
 add_executable(json_test json_test.cpp)
 add_executable(confreader_test confreader_test.cpp)
 add_executable(storage_test storage_test.cpp)
