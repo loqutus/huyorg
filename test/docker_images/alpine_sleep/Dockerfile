@@ -1,2 +1,3 @@
-FROM container4armhf/armhf-alpine
-CMD ["/bin/sleep", "10"]
+#FROM container4armhf/armhf-alpine
+FROM alpine
+CMD ["/bin/sleep", "60"]

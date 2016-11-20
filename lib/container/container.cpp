@@ -16,17 +16,22 @@ std::list<std::string> container::get_containers() {
 }
 
 std::string container::run_container(std::string image, std::string command) {
-  httpclient http_client(this->host, this->port);
-  std::string body;
-  body += "{\"image\":\"";
-  body += image;
-  body += "\",\"command\":\"";
-  body += command;
-  body += "\"}\n";
-  auto response = http_client.post("/containers/create", body);
-  json json_object(response);
+  std::string body_create;
+  body_create += "{\"image\":\"";
+  body_create += image;
+  body_create += "\",\"command\":\"";
+  body_create += command;
+  body_create += "\"}\n";
+  httpclient http_client_create(this->host, this->port);
+  auto response_create =
+      http_client_create.post("/containers/create", body_create);
+  json json_object(response_create);
   auto map = json_object.get_map();
   std::string container_id = map["Id"];
+  httpclient http_client(this->host, this->port);
+  std::string run_url = std::string("/containers/") + container_id + "/start";
+  std::string run_body = std::string("1");
+  auto response_run = http_client.post(run_url, run_body);
   return container_id;
 }
 

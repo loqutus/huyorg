@@ -13,7 +13,6 @@ int main(int argc, char** argv) {
   log_obj.write("SLAVE: docker_port", docker_port);
   const std::string docker_host = conf.get(std::string("docker_host"));
   log_obj.write("SLAVE: docker_host", docker_host);
-  container container_server(docker_host, docker_port);
   while (true) {
     tcpserver server(listen_host, listen_port);
     log_obj.write("SLAVE: listening");
@@ -21,10 +20,10 @@ int main(int argc, char** argv) {
     log_obj.write("SLAVE: master connected");
     json json_object(s);
     auto json_map = json_object.get_map();
-    // std::string action = json_map["action"];
     std::string action = json_map["action"];
     log_obj.write("SLAVE: action", action);
     if (action == "run_container") {
+      container container_server(docker_host, docker_port);
       log_obj.write("SLAVE: run_container");
       std::string container_image = json_map["image"];
       log_obj.write("SLAVE: image:", container_image);
@@ -35,6 +34,7 @@ int main(int argc, char** argv) {
       log_obj.write("SLAVE: container_id", container_id);
       server.write_string(container_id);
     } else if (action == "get_containers") {
+      container container_server(docker_host, docker_port);
       log_obj.write("SLAVE: get_containers");
       auto containers_list = container_server.get_containers();
       json json_containers_list(containers_list);
@@ -42,6 +42,7 @@ int main(int argc, char** argv) {
       log_obj.write(containers_list_str);
       server.write_string(containers_list_str);
     } else if (action == "destroy_container") {
+      container container_server(docker_host, docker_port);
       log_obj.write("SLAVE: destroy container");
       auto container_id = json_map["id"];
       auto container_destroy_answer =

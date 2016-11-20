@@ -1,8 +1,8 @@
 {
 	"action": "add_pod",
 	"pod_name": "sleep",
-	"pod_command": "/bin/sleep 10",
-	"pod_count": "2",
+	"pod_command": "/bin/sleep 60",
+	"pod_count": "4",
 	"pod_image": "sleep",  
   "pod_cpus": "1",
   "pod_memory": "128",
