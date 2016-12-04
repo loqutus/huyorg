@@ -8,8 +8,8 @@
     - libboost-program-options1.58.0
     - libboost-system1.58.0
     - libboost-thread1.58.0
-    - etcd
     - byobu
+    - cpuburn
   tags: packages
 
 - name: pi names in hosts
@@ -48,3 +48,9 @@
 - name: restart docker on defaults file change
   service: name=docker state=restarted
   when: docker_file.changed
+
+- name: copy burn.sh
+  copy: src=burn.sh dest=/usr/local/bin/burn.sh mode=755 owner=root
+
+- name: copy temp.sh
+  copy: src=temp.sh dest=/usr/local/bin/temp.sh mode=755 owner=root

@@ -22,16 +22,14 @@ std::string container::run_container(std::string image, std::string command) {
   body_create += "\",\"command\":\"";
   body_create += command;
   body_create += "\"}\n";
-  httpclient http_client_create(this->host, this->port);
-  auto response_create =
-      http_client_create.post("/containers/create", body_create);
-  json json_object(response_create);
+  httpclient http_client(this->host, this->port);
+  auto response = http_client.post("/containers/create", body_create);
+  json json_object(response);
   auto map = json_object.get_map();
   std::string container_id = map["Id"];
-  httpclient http_client(this->host, this->port);
+  httpclient http_client2(this->host, this->port);
   std::string run_url = std::string("/containers/") + container_id + "/start";
-  std::string run_body = std::string("1");
-  auto response_run = http_client.post(run_url, run_body);
+  auto response_run = http_client.post(run_url, " ");
   return container_id;
 }
 

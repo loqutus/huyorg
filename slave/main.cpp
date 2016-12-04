@@ -31,7 +31,7 @@ int main(int argc, char** argv) {
       log_obj.write("SLAVE: command:", container_command);
       std::string container_id =
           container_server.run_container(container_image, container_command);
-      log_obj.write("SLAVE: container_id", container_id);
+      log_obj.write("SLAVE: container_id:", container_id);
       server.write_string(container_id);
     } else if (action == "get_containers") {
       container container_server(docker_host, docker_port);
@@ -39,7 +39,7 @@ int main(int argc, char** argv) {
       auto containers_list = container_server.get_containers();
       json json_containers_list(containers_list);
       auto containers_list_str = json_containers_list.get_string_from_list();
-      log_obj.write(containers_list_str);
+      log_obj.write("SLAVE: containers", containers_list_str);
       server.write_string(containers_list_str);
     } else if (action == "destroy_container") {
       container container_server(docker_host, docker_port);

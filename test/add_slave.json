@@ -2,7 +2,7 @@
   "action": "add_slave",
   "slave_host": "localhost",
   "slave_port": "8888",
-  "slave_cpus": "10",
-  "slave_memory":  "1280",
-  "slave_disk": "10"
+  "slave_cpus": "4",
+  "slave_memory":  "900",
+  "slave_disk": "30"
 }

@@ -11,7 +11,7 @@ export CXX="clang++"
 export CC="clang" 
 cmake DCMAKE_BUILD_TYPE=Debug ..
 #cmake DCMAKE_BUILD_TYPE=Release ..
-#make -j 4
-make -j 8
-make -j 8 test
+make -j 4
+#make -j 8
+make -j 4 test
 exit $?

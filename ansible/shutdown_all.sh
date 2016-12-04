@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-for i in $(seq 1 4); do
+set -x
+for i in $(seq 2 5); do
   ssh root@pi$i shutdown -h now
 done
-shutdown -h now
+sleep 5
+sudo shutdown -h now
