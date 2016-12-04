@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 for i in $(seq 1 5); do
   echo pi$i
-  ssh pi$i 'pkill -f burnCortexA8 &'
+  ssh pi$i 'pkill -f burnCortexA9 &'
   ssh pi$i '/usr/local/bin/burn.sh' &
 done
 while true; do
