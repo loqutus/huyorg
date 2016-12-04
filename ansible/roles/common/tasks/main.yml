@@ -54,3 +54,11 @@
 
 - name: copy temp.sh
   copy: src=temp.sh dest=/usr/local/bin/temp.sh mode=755 owner=root
+
+- name: UseDNS no in sshd config
+  lineinfile: dest=/etc/ssh/sshd_config state=present line='UseDNS no'
+  register: sshd_config
+
+- name: restart sshd on ssh_config change
+  service: name=ssh state=restarted
+  when: sshd_config.changed
