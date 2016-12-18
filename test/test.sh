@@ -11,13 +11,15 @@ killall -9 client 2>&1 > /dev/null || true 2>&1 > /dev/null
 ./master/master &
 sleep 1
 ./slave/slave &
-sleep 1
+ps aux | grep master | grep -v grep | awk '{print $2}'
+ps aux | grep slave | grep -v grep | awk '{print $2}'
+sleep 10
 #sudo netstat -tulpn | egrep -e '9999|8888'
 ./client/client --json ../test/add_slave.json
 sleep 1
 ./client/client --json ../test/add_pod.json
-echo "sleep 10"
-sleep 10
+echo "sleep 60"
+sleep 60
 cat master.log
 cat slave.log
 date

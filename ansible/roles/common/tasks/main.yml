@@ -10,6 +10,7 @@
     - libboost-thread1.58.0
     - byobu
     - cpuburn
+    - strace
   tags: packages
 
 - name: pi names in hosts

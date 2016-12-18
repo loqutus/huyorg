@@ -28,8 +28,8 @@ std::string container::run_container(std::string image, std::string command) {
   auto map = json_object.get_map();
   std::string container_id = map["Id"];
   httpclient http_client2(this->host, this->port);
-  std::string run_url = std::string("/containers/") + container_id + "/start";
-  auto response_run = http_client.post(run_url, " ");
+  std::string run_url = "/containers/" + container_id + "/start";
+  auto response_run = http_client2.post_zero_body(run_url);
   return container_id;
 }
 
