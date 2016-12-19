@@ -33,7 +33,7 @@ bool httpclient::post_zero_body(std::string uri) {
   tcpclient tcp_client(this->host, this->port);
   auto message = std::string("POST " + uri + " HTTP/1.1\nHost: [" +
                              this->host.c_str() + "]:" + this->port.c_str() +
-                             "\nUser-Agent: huyorg/0.0.1\nAccept: */*");
+                             "\nUser-Agent: huyorg/0.0.1\nAccept: */*\n\n");
   tcp_client.write_string(std::string(message));
-  return 0;
+  return true;
 }

@@ -30,7 +30,8 @@ int main(int argc, char** argv) {
       std::string container_command = json_map["command"];
       log_obj.write("SLAVE: command:", container_command);
       std::string container_id =
-          container_server.run_container(container_image, container_command);
+          container_server.create_container(container_image, container_command);
+      auto run_container = container_server.run_container(container_id);
       log_obj.write("SLAVE: container_id:", container_id);
       server.write_string(container_id);
     } else if (action == "get_containers") {
@@ -47,8 +48,8 @@ int main(int argc, char** argv) {
       auto container_id = json_map["id"];
       auto container_destroy_answer =
           container_server.destroy_container(container_id);
-      log_obj.write(container_destroy_answer);
-      server.write_string(container_destroy_answer);
+      log_obj.write("SLAVE: " + container_id + " destroyed");
+      server.write_string(container_id);
     } else if (action == "stop") {
       log_obj.write("SLAVE: stop");
       server.write_string("OK");

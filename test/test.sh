@@ -18,8 +18,8 @@ sleep 10
 ./client/client --json ../test/add_slave.json
 sleep 1
 ./client/client --json ../test/add_pod.json
-echo "sleep 60"
-sleep 60
+echo "sleep 30"
+sleep 30
 cat master.log
 cat slave.log
 date
@@ -27,7 +27,7 @@ curl http://\[::1\]:7777/containers/json
 killall -9 master 2>&1 > /dev/null || true 2>&1 > /dev/null
 killall -9 slave 2>&1 > /dev/null || true 2>&1 > /dev/null
 killall -9 client 2>&1 > /dev/null || true 2>&1 > /dev/null
-docker -H 127.0.0.1:7777 ps -a
+docker -H 127.0.0.1:7777 ps
 for i in $(docker -H 127.0.0.1:7777 ps -a | grep -v CONTAINER | awk '{print $1}'); do
   docker -H 127.0.0.1:7777  stop $i;
   docker -H 127.0.0.1:7777 rm $i;

@@ -15,7 +15,8 @@ std::list<std::string> container::get_containers() {
   return list_of_strings;
 }
 
-std::string container::run_container(std::string image, std::string command) {
+std::string container::create_container(std::string image,
+                                        std::string command) {
   std::string body_create;
   body_create += "{\"image\":\"";
   body_create += image;
@@ -27,18 +28,21 @@ std::string container::run_container(std::string image, std::string command) {
   json json_object(response);
   auto map = json_object.get_map();
   std::string container_id = map["Id"];
-  httpclient http_client2(this->host, this->port);
-  std::string run_url = "/containers/" + container_id + "/start";
-  auto response_run = http_client2.post_zero_body(run_url);
   return container_id;
 }
 
-std::string container::destroy_container(std::string container_id) {
+bool container::run_container(std::string container_id) {
   httpclient http_client(this->host, this->port);
-  std::string body("");
+  std::string run_url = "/containers/" + container_id + "/start";
+  auto response_run = http_client.post_zero_body(run_url);
+  return true;
+}
+
+bool container::destroy_container(std::string container_id) {
+  httpclient http_client(this->host, this->port);
   std::string url = "/containers/";
   url += container_id;
   url += "/kill";
-  auto response = http_client.post(url, body);
-  return response;
+  auto response = http_client.post_zero_body(url);
+  return true;
 }

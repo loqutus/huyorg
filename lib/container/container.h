@@ -14,8 +14,9 @@ class container {
  public:
   container(std::string host, std::string port);
   std::list<std::string> get_containers();
-  std::string run_container(std::string image, std::string command);
-  std::string destroy_container(std::string container_id);
+  std::string create_container(std::string image, std::string command);
+  bool run_container(std::string container_id);
+  bool destroy_container(std::string container_id);
 };
 
 #endif  // PROJECT_CONTAINER_H
