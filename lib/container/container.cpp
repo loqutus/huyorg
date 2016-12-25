@@ -3,7 +3,8 @@
 container::container(std::string host, std::string port)
     : host(host), port(port) {}
 
-std::list<std::string> container::get_containers() {
+// std::list<std::string> container::get_containers() {
+std::string container::get_containers() {
   httpclient http_client(this->host, this->port);
   std::string json_string = http_client.get(std::string("/containers/json"));
   json json_object(json_string);
@@ -12,7 +13,7 @@ std::list<std::string> container::get_containers() {
   for (auto map : list_of_maps) {
     list_of_strings.push_back(map["Id"]);
   }
-  return list_of_strings;
+  return json_string;
 }
 
 std::string container::create_container(std::string image,
