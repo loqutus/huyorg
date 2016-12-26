@@ -13,7 +13,7 @@ TEST(Container, RunContainerTest) {
   std::cerr << container_started << std::endl;
   EXPECT_EQ(container_started, true);
 }
-
+/*
 TEST(Container, GetContainersTest) {
   container container_client("::1", "7777");
   auto container_id =
@@ -25,4 +25,4 @@ TEST(Container, GetContainersTest) {
   auto containers_list = container_client.get_containers();
   std::cerr << containers_list << std::endl;
   EXPECT_NE(container_id, std::string(""));
-}
+}*/
