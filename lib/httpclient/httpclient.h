@@ -1,8 +1,8 @@
 #ifndef PROJECT_HTTPCLIENT_H
 #define PROJECT_HTTPCLIENT_H
 
+#include <sstream>
 #include <string>
-#include "../logging/logging.h"
 #include "../tcpclient/tcpclient.h"
 
 class httpclient {
@@ -13,7 +13,6 @@ class httpclient {
   httpclient(std::string host, std::string port);
   std::string get(std::string url);
   std::string post(std::string url, std::string body);
-  bool post_zero_body(std::string url);
 };
 
 #endif  // PROJECT_HTTPCLIENT_H

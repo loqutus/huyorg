@@ -9,10 +9,8 @@ int main(int argc, char** argv) {
   log_obj.write("SLAVE: listen_host", listen_host);
   const std::string listen_port = conf.get(std::string("port"));
   log_obj.write("SLAVE: listen_port", listen_port);
-  const std::string docker_port = conf.get(std::string("docker_port"));
-  log_obj.write("SLAVE: docker_port", docker_port);
-  const std::string docker_host = conf.get(std::string("docker_host"));
-  log_obj.write("SLAVE: docker_host", docker_host);
+  const std::string docker_url = conf.get(std::string("docker_url"));
+  log_obj.write("SLAVE: docker_url", docker_url);
   while (true) {
     tcpserver server(listen_host, listen_port);
     log_obj.write("SLAVE: listening");
@@ -23,7 +21,7 @@ int main(int argc, char** argv) {
     std::string action = json_map["action"];
     log_obj.write("SLAVE: action", action);
     if (action == "run_container") {
-      container container_server(docker_host, docker_port);
+      container container_server(docker_url);
       log_obj.write("SLAVE: run_container");
       std::string container_image = json_map["image"];
       log_obj.write("SLAVE: image:", container_image);

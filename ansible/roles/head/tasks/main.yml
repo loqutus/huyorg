@@ -20,6 +20,8 @@
       - libboost-system-dev
       - libboost-thread-dev
       - libboost-program-options-dev
+      - libcurlpp-dev
+      - libcurl4-openssl-dev
       - mc
       - devscripts
       - dh-make

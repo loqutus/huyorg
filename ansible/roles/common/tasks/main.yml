@@ -11,6 +11,8 @@
     - byobu
     - cpuburn
     - strace
+    - libcurlpp0
+    - nload
   tags: packages
 
 - name: pi names in hosts
@@ -63,3 +65,7 @@
 - name: restart sshd on ssh_config change
   service: name=ssh state=restarted
   when: sshd_config.changed
+
+- name: docker bash alias
+  lineinfile: path=/home/rusik/.bashrc line='alias docker="docker -H 127.0.0.1:7777 "'
+  

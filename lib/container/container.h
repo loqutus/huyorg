@@ -8,13 +8,11 @@
 #include "../json/json.h"
 
 class container {
-  std::string host;
-  std::string port;
+  std::string host, port, url;
 
  public:
   container(std::string host, std::string port);
-  // std::list<std::string> get_containers();
-  std::string get_containers();
+  std::list<std::string> get_containers();
   std::string create_container(std::string image, std::string command);
   bool run_container(std::string container_id);
   bool destroy_container(std::string container_id);
