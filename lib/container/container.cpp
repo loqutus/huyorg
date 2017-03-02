@@ -4,10 +4,10 @@ container::container(std::string host, std::string port)
     : host(host), port(port), url("http://" + host + ":" + port + ":/") {}
 
 std::list<std::string> container::get_containers() {
-  std::string url_containers =
-      std::string(this->url.c_str() + "containers/json")
-          httpclient http_client(url_containers);
-  std::string json_string = http_client.get();
+  std::string url_json("containers/json");
+  std::string url_containers(this->url + url_json);
+  httpclient http_client(this->host, this->port);
+  std::string json_string = http_client.get(url_containers);
   json json_object(json_string);
   auto list_of_maps = json_object.get_list_of_maps();
   if (!list_of_maps.empty()) {
