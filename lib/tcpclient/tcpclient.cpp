@@ -28,7 +28,7 @@ std::string tcpclient::read_string(int timeout) {
 std::string tcpclient::write_read_string(std::string message, int timeout) {
   boost::asio::ip::tcp::iostream stream;
   stream.expires_from_now(boost::posix_time::seconds(timeout));
-  stream.connect(host, port);
+  stream.connect(this->host.c_str(), this->port.c_str());
   if (!stream) return std::string("Fuck!");
   stream << message;
   stream.flush();

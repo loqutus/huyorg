@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/rusik/ClionProjects/huyorg/lib/tcpserver/tcpserver.cpp
+tcpserver.h
+/Users/rusik/ClionProjects/huyorg/lib/tcpserver/tcpserver.h
+
+/Users/rusik/ClionProjects/huyorg/lib/tcpserver/tcpserver.h
+boost/asio.hpp
+-
+boost/lexical_cast.hpp
+-
+string
+-
+vector
+-
+

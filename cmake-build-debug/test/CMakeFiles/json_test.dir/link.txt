@@ -1,0 +1,1 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -std=c++11 -w -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/json_test.dir/json_test.cpp.o  -o json_test  libgtest/libgtest.a libgtest/libgtest_main.a ../master/libjson.a libgtest/libgtest.a 

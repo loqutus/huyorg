@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/rusik/ClionProjects/huyorg/lib/read_file/read_file.cpp
+read_file.h
+/Users/rusik/ClionProjects/huyorg/lib/read_file/read_file.h
+
+/Users/rusik/ClionProjects/huyorg/lib/read_file/read_file.h
+fstream
+-
+iostream
+-
+streambuf
+-
+string
+-
+

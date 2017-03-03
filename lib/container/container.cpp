@@ -17,7 +17,7 @@ std::list<std::string> container::get_containers() {
     }
     return list_of_strings;
   } else {
-    return std::list<std::string>;
+    return std::list<std::string>();
   }
 }
 
@@ -29,8 +29,9 @@ std::string container::create_container(std::string image,
   body_create += "\",\"command\":\"";
   body_create += command;
   body_create += "\"}\n";
-  httpclient http_client(this->url.c_str() + "containers/create");
-  auto response = http_client.post(body_create);
+  std::string url_string = this->url + std::string("containers/create");
+  httpclient http_client(this->host, this->port);
+  auto response = http_client.post(url_string, body_create);
   json json_object(response);
   auto map = json_object.get_map();
   std::string container_id = map["Id"];
@@ -38,15 +39,17 @@ std::string container::create_container(std::string image,
 }
 
 bool container::run_container(std::string container_id) {
-  httpclient http_client(this->url.c_str() + "containers/" + container_id +
-                         "/start");
-  auto response_run = http_client.post(std::string(""));
+  std::string url_string = this->url + std::string("containers/") +
+                           container_id + std::string("/start");
+  httpclient http_client(this->host, this->port);
+  auto response_run = http_client.post(url_string, std::string(""));
   return true;
 }
 
 bool container::destroy_container(std::string container_id) {
-  httpclient http_client(this->url.c_str() + "containers/" + container_id +
-                         "/kill");
-  auto response = http_client.post(std::string(""));
+  std::string url_string = this->url + std::string("containers/") +
+                           container_id + std::string("/kill");
+  httpclient http_client(this->host, this->port);
+  auto response = http_client.post(url_string, std::string(""));
   return true;
 }

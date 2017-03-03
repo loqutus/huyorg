@@ -1,6 +1,6 @@
 #include "main.h"
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
   const std::string conf_file("../test/slave.conf");
   confreader conf(conf_file);
   logging log_obj(conf.get(std::string("log")));
@@ -11,6 +11,10 @@ int main(int argc, char** argv) {
   log_obj.write("SLAVE: listen_port", listen_port);
   const std::string docker_url = conf.get(std::string("docker_url"));
   log_obj.write("SLAVE: docker_url", docker_url);
+  const std::string docker_host = conf.get(std::string("docker_host"));
+  log_obj.write("SLAVE: docker_host", docker_host);
+  const std::string docker_port = conf.get(std::string("docker_port"));
+  log_obj.write("SLAVE: docker_port", docker_port);
   while (true) {
     tcpserver server(listen_host, listen_port);
     log_obj.write("SLAVE: listening");
@@ -21,12 +25,12 @@ int main(int argc, char** argv) {
     std::string action = json_map["action"];
     log_obj.write("SLAVE: action", action);
     if (action == "run_container") {
-      container container_server(docker_url);
       log_obj.write("SLAVE: run_container");
       std::string container_image = json_map["image"];
       log_obj.write("SLAVE: image:", container_image);
       std::string container_command = json_map["command"];
       log_obj.write("SLAVE: command:", container_command);
+      container container_server(docker_host, docker_port);
       std::string container_id =
           container_server.create_container(container_image, container_command);
       auto run_container = container_server.run_container(container_id);

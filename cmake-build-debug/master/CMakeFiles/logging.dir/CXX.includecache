@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/rusik/ClionProjects/huyorg/lib/confreader/confreader.h
+fstream
+-
+map
+-
+sstream
+-
+string
+-
+
+/Users/rusik/ClionProjects/huyorg/lib/logging/logging.cpp
+logging.h
+/Users/rusik/ClionProjects/huyorg/lib/logging/logging.h
+
+/Users/rusik/ClionProjects/huyorg/lib/logging/logging.h
+time.h
+-
+algorithm
+-
+fstream
+-
+memory
+-
+string
+-
+../confreader/confreader.h
+/Users/rusik/ClionProjects/huyorg/lib/confreader/confreader.h
+

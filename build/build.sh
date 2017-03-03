@@ -10,5 +10,5 @@ fi
 export CXX="clang++" 
 export CC="clang" 
 cmake DCMAKE_BUILD_TYPE=Debug ..
-make -j 4 && make -j 4 test
+make -j 8 && make -j 8 test
 exit $?
