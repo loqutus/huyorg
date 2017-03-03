@@ -1,1 +1,0 @@
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -std=c++11 -w -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/storage_test.dir/storage_test.cpp.o  -o storage_test  libgtest/libgtest.a libgtest/libgtest_main.a ../master/libconfreader.a ../master/libstorage.a libgtest/libgtest.a 
