@@ -6,7 +6,7 @@
 
 TEST(HTTP, HttpPostTest) {
   httpclient client("127.0.0.1", "7777");
-  std::string url("http://[::1]:7777/containers/create");
+  std::string url("http://127.0.0.1]:7777/containers/create");
   std::string json_body =
       "{\"image\":\"sleep\", \"command\":\"/bin/sleep 60\"}";
   auto create_container = client.post(url, json_body);
@@ -16,7 +16,7 @@ TEST(HTTP, HttpPostTest) {
 
 TEST(HTTP, HttpGetTest) {
   httpclient client("127.0.0.1", "7777");
-  std::string url("http://[::1]:7777/containers/json");
+  std::string url("http://[127.0.0.1]:7777/containers/json");
   auto get_containers = client.get(url);
   EXPECT_NE(get_containers, std::string(""));
   EXPECT_NE(get_containers, std::string("Fuck!"));

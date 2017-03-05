@@ -39,5 +39,5 @@ std::string tcpclient::write_read_string(std::string message, int timeout) {
   }
   stream >> temp;
   stream.close();
-  return temp;
+  return header;
 }

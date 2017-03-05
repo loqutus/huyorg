@@ -38,18 +38,18 @@ std::string container::create_container(std::string image,
   return container_id;
 }
 
-bool container::run_container(std::string container_id) {
+std::string container::run_container(std::string container_id) {
   std::string url_string = this->url + std::string("containers/") +
                            container_id + std::string("/start");
   httpclient http_client(this->host, this->port);
-  auto response_run = http_client.post(url_string, std::string(""));
-  return true;
+  auto response = http_client.post(url_string, std::string(""));
+  return response;
 }
 
-bool container::destroy_container(std::string container_id) {
+std::string container::destroy_container(std::string container_id) {
   std::string url_string = this->url + std::string("containers/") +
                            container_id + std::string("/kill");
   httpclient http_client(this->host, this->port);
   auto response = http_client.post(url_string, std::string(""));
-  return true;
+  return response;
 }
