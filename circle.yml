@@ -10,7 +10,7 @@ dependencies:
     - sudo cp -R googletest/googletest/* /Users/rusik/Downloads/googletest/
     - sudo add-apt-repository ppa:samuel-bachmann/boost -y
     - sudo apt-get update
-    - sudo apt-get install boost1.60 socat clang curlpp libcurl-dev
+    - sudo apt-get install boost1.60 socat clang curlpp
   override:
     - cd build ; ./build.sh
 test:
