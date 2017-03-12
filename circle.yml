@@ -11,6 +11,7 @@ dependencies:
     - sudo add-apt-repository ppa:samuel-bachmann/boost -y
     - sudo apt-get update
     - sudo apt-get install boost1.60 socat clang libcurlpp-dev
+    - cd test/docker_images/alpine_sleep ; docker build -t sleep ./
   override:
     - cd build ; ./build.sh
 test:
