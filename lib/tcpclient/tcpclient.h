@@ -5,7 +5,9 @@
 #include <boost/lexical_cast.hpp>
 #include <fstream>
 #include <iostream>
+#include <sstream>
 #include <string>
+#include <type_traits>
 #include "../logging/logging.h"
 
 class tcpclient {
