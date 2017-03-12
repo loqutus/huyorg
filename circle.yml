@@ -3,7 +3,7 @@ machine:
     - docker
 dependencies:
   pre:
-    - git clone https://github.com/google/googletest.git ; cd googletest/googletest/; mkdir build; cd build; cmake ..; make ; make install
+    - git clone https://github.com/google/googletest.git ; cd googletest/googletest/; mkdir build; cd build; cmake ..; make ; sudo make install
     - sudo apt-get update; sudo apt-get install libboost-all socat
   override:
     - cd build ; ./build.sh
