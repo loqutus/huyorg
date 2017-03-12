@@ -4,7 +4,7 @@ machine:
 dependencies:
   pre:
     - git clone https://github.com/google/googletest.git ; cd googletest/googletest/; mkdir build; cd build; cmake ..; make ; sudo make install
-    - sudo apt-get update; sudo apt-get install libboost-all socat
+    - sudo apt-get update; sudo apt-get install libboost-system libboost-program-options libboost-thread  socat
   override:
     - cd build ; ./build.sh
 test:
