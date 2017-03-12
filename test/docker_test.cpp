@@ -1,8 +1,8 @@
-#include <gtest/gtest.h>
+#include "../lib/container/container.h"
 #include <chrono>
+#include <gtest/gtest.h>
 #include <iostream>
 #include <thread>
-#include "../lib/container/container.h"
 
 TEST(Container, RunContainerTest) {
   container container_client("::1", "7777");

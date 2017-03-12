@@ -1,6 +1,6 @@
+#include "../lib/json/json.h"
 #include "../lib/storage/storage.h"
 #include <gtest/gtest.h>
-#include "../lib/json/json.h"
 
 TEST(Storage, StorageSlave) {
   std::unordered_map<std::string, std::string> slave_map;

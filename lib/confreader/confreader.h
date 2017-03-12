@@ -7,7 +7,7 @@
 #include <string>
 
 class confreader {
- public:
+public:
   confreader(std::string confname);
 
   ~confreader();
@@ -15,7 +15,7 @@ class confreader {
   std::string get(std::string key);
   int get_int(std::string key);
 
- private:
+private:
   std::ifstream conffile;
   std::map<std::string, std::string> conf_map;
 };

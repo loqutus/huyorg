@@ -15,7 +15,7 @@ class json {
   std::unordered_map<std::string, std::string> input_map;
   std::list<std::string> input_list;
 
- public:
+public:
   json(std::string input);
   json(std::unordered_map<std::string, std::string> input);
   json(std::list<std::string> input);
@@ -28,4 +28,4 @@ class json {
   std::string get_string_from_list();
 };
 
-#endif  // PROJECT_JSON_H
+#endif // PROJECT_JSON_H

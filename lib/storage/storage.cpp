@@ -39,8 +39,8 @@ bool storage::set_container(std::string key, std::string value) {
   return true;
 }
 
-std::unordered_map<std::string, std::string> storage::get_slave(
-    std::string key) {
+std::unordered_map<std::string, std::string>
+storage::get_slave(std::string key) {
   return this->slaves_map[key];
 }
 
@@ -50,7 +50,7 @@ std::unordered_map<std::string, std::string> storage::get_pod(std::string key) {
 
 std::vector<std::string> storage::get_slaves_vector() {
   std::vector<std::string> slaves_vector;
-  for (auto& iterator : this->slaves_map) {
+  for (auto &iterator : this->slaves_map) {
     slaves_vector.push_back(iterator.first);
   }
   return slaves_vector;
@@ -58,7 +58,7 @@ std::vector<std::string> storage::get_slaves_vector() {
 
 std::vector<std::string> storage::get_pods_vector() {
   std::vector<std::string> pods_vector;
-  for (auto& iterator : this->pods_map) {
+  for (auto &iterator : this->pods_map) {
     pods_vector.push_back(iterator.first);
   }
   return pods_vector;
@@ -66,7 +66,7 @@ std::vector<std::string> storage::get_pods_vector() {
 
 std::vector<std::string> storage::get_containers_vector() {
   std::vector<std::string> containers_vector;
-  for (auto& iterator : this->containers_map) {
+  for (auto &iterator : this->containers_map) {
     containers_vector.push_back(iterator.first);
   }
   return containers_vector;

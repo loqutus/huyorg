@@ -1,6 +1,7 @@
 #ifndef PROJECT_TCPCLIENT_H
 #define PROJECT_TCPCLIENT_H
 
+#include "../logging/logging.h"
 #include <boost/asio.hpp>
 #include <boost/lexical_cast.hpp>
 #include <fstream>
@@ -8,20 +9,20 @@
 #include <sstream>
 #include <string>
 #include <type_traits>
-#include "../logging/logging.h"
 
 class tcpclient {
- public:
+public:
   tcpclient(std::string host = std::string("::1"),
-            std::string port = std::string("9999"));
-  bool write_string(std::string message, int timeout = 60);
-  std::string read_string(int timeout = 60);
-  std::string write_read_string(std::string message, int timeout = 60);
+            std::string port = std::string("9999"), int timeout = 60);
+  bool write_string(std::string message);
+  std::string read_string();
+  // std::string write_read_string(std::string message);
 
- private:
+private:
   std::string host;
   std::string port;
+  int timeout;
   int buffer_size = 1048576;
 };
 
-#endif  // PROJECT_TCPCLIENT_H
+#endif // PROJECT_TCPCLIENT_H

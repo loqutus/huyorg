@@ -6,7 +6,7 @@ logging::logging(std::string logfilename) {
 
 logging::~logging() { logfile.close(); }
 
-int logging::write(const char* left, std::string right) {
+int logging::write(const char *left, std::string right) {
   right.erase(std::remove(right.begin(), right.end(), '\n'), right.end());
   time_t rawtime;
   time(&rawtime);

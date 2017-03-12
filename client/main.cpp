@@ -1,6 +1,6 @@
 #include "main.h"
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
   optparse options(argc, argv);
   read_file file(options.get("json"));
   tcpclient client(options.get("host"), options.get("port"));

@@ -4,7 +4,7 @@
 
 #include "optparse.h"
 
-optparse::optparse(int argc, char** argv) : desc("Options:") {
+optparse::optparse(int argc, char **argv) : desc("Options:") {
   std::string host;
   std::string port;
   std::string command;

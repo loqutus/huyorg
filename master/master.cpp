@@ -29,8 +29,8 @@ int master::listen() {
   }
 }
 
-std::string master::do_action(
-    std::unordered_map<std::string, std::string> json_map) {
+std::string
+master::do_action(std::unordered_map<std::string, std::string> json_map) {
   std::string return_string;
   std::string action = json_map["action"];
   if (action == std::string("add_slave")) {

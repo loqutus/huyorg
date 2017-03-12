@@ -1,28 +1,72 @@
 #include "httpclient.h"
 
-httpclient::httpclient(std::string host, std::string port)
-    : host(host), port(port){};
+httpclient::httpclient(std::string url, std::string body)
+    : url(url), data(body.c_str()){};
 
-std::string httpclient::get(std::string url) {
-  tcpclient tcp_client(this->host, this->port);
-  std::string message = "GET " + url + " HTTP/1.1\n Host: " + this->host + ":" +
-                        this->port +
-                        "\nUser-agent: huyorg/0.0.1\n Accept: */* \n "
-                        "Accept-Encoding: gzip \n Connection: close\n\n";
-  auto read_message = tcp_client.write_read_string(message);
-  return read_message;
+size_t httpclient::readData(char *buffer, size_t size, size_t nitems) {
+  strncpy(buffer, data, size * nitems);
+  return size * nitems;
 }
 
-std::string httpclient::post(std::string url, std::string body) {
-  tcpclient tcp_client(this->host, this->port);
-  int body_length = body.length();
-  std::string body_length_str = std::to_string(body_length - 1);
-  std::string message = std::string("POST ") + url + " HTTP/1.1\nHost: " +
-                        this->host + ":" + this->port + "\n" +
-                        "User-agent: huyorg/0.0.1\nAccept: */*\nContent-Type: "
-                        "application/json\n" +
-                        "Content-Length: " + body_length_str + "\n\n" + body +
-                        "\n";
-  auto read_message = tcp_client.write_read_string(message);
-  return read_message;
+std::string httpclient::get() {
+  try {
+    curlpp::Cleanup myCleanup;
+    curlpp::Easy myRequest;
+    std::stringstream os;
+    curlpp::options::WriteStream ws(&os);
+    myRequest.setOpt(ws);
+    myRequest.setOpt<curlpp::Options::Url>(this->url.c_str());
+    std::list<std::string> headers;
+    headers.push_back("User-Agent: huyorg/0.0.1");
+    headers.push_back("Accept: */*");
+    headers.push_back("Accept-Encoding: gzip");
+    headers.push_back("Connection: close");
+    myRequest.setOpt(new curlpp::Options::HttpHeader(headers));
+    myRequest.perform();
+    std::string result;
+    os >> result;
+    return result;
+  }
+
+  catch (curlpp::RuntimeError &e) {
+    return std::string("ERROR");
+  }
+
+  catch (curlpp::LogicError &e) {
+    return std::string("ERROR");
+  }
+}
+
+std::string httpclient::post() {
+  try {
+    curlpp::Cleanup myCleanup;
+    curlpp::Easy myRequest;
+    std::stringstream os;
+    curlpp::options::WriteStream ws(&os);
+    myRequest.setOpt(ws);
+    myRequest.setOpt<curlpp::Options::Url>(this->url.c_str());
+    myRequest.setOpt(new curlpp::Options::ReadFunction(
+        curlpp::types::ReadFunctionFunctor(this->readData)));
+    std::list<std::string> headers;
+    headers.push_back("User-Agent: huyorg/0.0.1");
+    headers.push_back("Accept: */*");
+    headers.push_back("Accept-Encoding: gzip");
+    headers.push_back("Connection: close");
+    myRequest.setOpt(new curlpp::Options::HttpHeader(headers));
+    int size = strlen(this->data);
+    myRequest.setOpt(new curlpp::Options::InfileSize(size));
+    myRequest.setOpt(new curlpp::Options::Upload(true));
+    myRequest.perform();
+    std::string result;
+    os >> result;
+    return result;
+  }
+
+  catch (curlpp::RuntimeError &e) {
+    return std::string("ERROR");
+  }
+
+  catch (curlpp::LogicError &e) {
+    return std::string("ERROR");
+  }
 }

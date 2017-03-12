@@ -15,16 +15,16 @@ class storage {
       pods_map;
   std::unordered_map<std::string, std::string> containers_map;
 
- public:
+public:
   ~storage();
   bool set_slave(std::string host_port,
                  std::unordered_map<std::string, std::string>
-                     value);  // key-slave host, port; value=slave parameters
+                     value); // key-slave host, port; value=slave parameters
   bool set_pod(std::string key,
                std::unordered_map<std::string, std::string>
-                   value);  // key-pod name, value=pod parameters
+                   value); // key-pod name, value=pod parameters
   bool set_container(std::string key,
-                     std::string value);  // key=container_id, value=slave
+                     std::string value); // key=container_id, value=slave
   int remove_slave(std::string host_port);
   int remove_pod(std::string key);
   bool is_slaves_empty();
@@ -41,4 +41,4 @@ class storage {
 };
 extern storage store;
 
-#endif  // PROJECT_STORAGE_H
+#endif // PROJECT_STORAGE_H

@@ -14,7 +14,7 @@ void run_watcher() {
   Watcher.watch(conf.get_int("sleep"));
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
   std::thread thread1(run_master);
   std::thread thread2(run_watcher);
   thread1.join();
