@@ -11,5 +11,5 @@ add_library(container ${CONTAINER})
 #add_library(confreader ${CONFREADER})
 #add_library(json ${JSON})
 add_executable(slave ${SOURCE_FILES})
-target_link_libraries(slave LINK_PUBLIC logging container tcpserver logging confreader json httpclient tcpclient ${Boost_LIBRARIES})
+target_link_libraries(slave LINK_PUBLIC logging container tcpserver logging confreader json httpclient tcpclient curlpp curl ${Boost_LIBRARIES})
 

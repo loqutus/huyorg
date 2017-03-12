@@ -1,12 +1,7 @@
 #include "httpclient.h"
 
-httpclient::httpclient(std::string url, std::string body)
-    : url(url), data(body.c_str()){};
-
-size_t httpclient::readData(char *buffer, size_t size, size_t nitems) {
-    strncpy(buffer, data, size * nitems);
-    return size * nitems;
-}
+httpclient::httpclient(std::string url, std::string data)
+    : url(url), data(data){};
 
 std::string httpclient::get() {
     try {
@@ -45,17 +40,17 @@ std::string httpclient::post() {
         curlpp::options::WriteStream ws(&os);
         myRequest.setOpt(ws);
         myRequest.setOpt<curlpp::Options::Url>(this->url.c_str());
-        myRequest.setOpt(new curlpp::Options::ReadFunction(
-            curlpp::types::ReadFunctionFunctor(this->readData)));
         std::list<std::string> headers;
         headers.push_back("User-Agent: huyorg/0.0.1");
         headers.push_back("Accept: */*");
         headers.push_back("Accept-Encoding: gzip");
+        headers.push_back("Content-Type: text/plain");
+        headers.push_back("Content-Length: 0");
         headers.push_back("Connection: close");
         myRequest.setOpt(new curlpp::Options::HttpHeader(headers));
-        int size = strlen(this->data);
-        myRequest.setOpt(new curlpp::Options::InfileSize(size));
-        myRequest.setOpt(new curlpp::Options::Upload(true));
+        myRequest.setOpt(new curlpp::options::PostFields(this->data));
+        myRequest.setOpt(
+            new curlpp::options::PostFieldSize(this->data.length()));
         myRequest.perform();
         std::string result;
         os >> result;
