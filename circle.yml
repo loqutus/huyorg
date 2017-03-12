@@ -5,7 +5,8 @@ dependencies:
   pre:
     - sudo rm -f /etc/apt/sources.list.d/mysql.list
     - git clone https://github.com/google/googletest.git ; cd googletest/googletest/; mkdir build; cd build; cmake ..; make ; sudo make install
-    - sudo apt-get update ; sudo apt-get install libboost-system libboost-program-options libboost-thread  socat
+    - apt-cache search boost | grep libboost
+    #- sudo apt-get update ; sudo apt-get install libboost-system libboost-program-options libboost-thread  socat
   override:
     - cd build ; ./build.sh
 test:
