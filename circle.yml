@@ -6,8 +6,8 @@ dependencies:
     - sudo rm -f /etc/apt/sources.list.d/mysql.list
     - git clone https://github.com/google/googletest.git
     - cd googletest/googletest/; mkdir build; cd build; cmake ..; make
-    - sudo mkdir -p /Users/rusik/Downloads/googletest
-    - sudo cp -R googletest/googletest/* /Users/rusik/Downloads/googletest/
+    - sudo mkdir -p /Users/rusik/Downloads/googletest/googletest
+    - sudo cp -R googletest/googletest/* /Users/rusik/Downloads/googletest/googletest
     - sudo add-apt-repository ppa:samuel-bachmann/boost -y
     - sudo apt-get update
     - sudo apt-get install boost1.60 socat clang libcurlpp-dev
