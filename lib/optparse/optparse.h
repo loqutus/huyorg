@@ -8,13 +8,13 @@
 #include <string>
 
 class optparse {
-public:
-  optparse(int argc, char **argv);
-  std::string get(std::string optname);
+  public:
+    optparse(int argc, char **argv);
+    std::string get(std::string optname);
 
-private:
-  boost::program_options::options_description desc;
-  boost::program_options::variables_map vm;
+  private:
+    boost::program_options::options_description desc;
+    boost::program_options::variables_map vm;
 };
 
 #endif // PROJECT_OPTPARSE_H

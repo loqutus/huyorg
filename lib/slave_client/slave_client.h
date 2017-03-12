@@ -8,14 +8,14 @@
 #include <vector>
 
 class slave_client {
-  std::string slave_host;
-  std::string slave_port;
+    std::string slave_host;
+    std::string slave_port;
 
-public:
-  slave_client(std::string slave_host, std::string slave_port);
-  std::list<std::string> get_containers();
-  std::string run_container(std::string image, std::string command);
-  std::string destroy_container(std::string container_id);
+  public:
+    slave_client(std::string slave_host, std::string slave_port);
+    std::list<std::string> get_containers();
+    std::string run_container(std::string image, std::string command);
+    std::string destroy_container(std::string container_id);
 };
 
 #endif // PROJECT_SLAVE_CLIENT_H

@@ -11,18 +11,18 @@
 #include <type_traits>
 
 class tcpclient {
-public:
-  tcpclient(std::string host = std::string("::1"),
-            std::string port = std::string("9999"), int timeout = 60);
-  bool write_string(std::string message);
-  std::string read_string();
-  // std::string write_read_string(std::string message);
+  public:
+    tcpclient(std::string host = std::string("::1"),
+              std::string port = std::string("9999"), int timeout = 60);
+    bool write_string(std::string message);
+    std::string read_string();
+    // std::string write_read_string(std::string message);
 
-private:
-  std::string host;
-  std::string port;
-  int timeout;
-  int buffer_size = 1048576;
+  private:
+    std::string host;
+    std::string port;
+    int timeout;
+    int buffer_size = 1048576;
 };
 
 #endif // PROJECT_TCPCLIENT_H

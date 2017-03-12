@@ -15,12 +15,12 @@
 #include <unistd.h>
 
 class watcher {
-  // key: slave_name, value: vector with running container ids
-  std::unordered_map<std::string, std::list<std::string>>
-  get_all_running_containers();
+    // key: slave_name, value: vector with running container ids
+    std::unordered_map<std::string, std::list<std::string>>
+    get_all_running_containers();
 
-public:
-  void watch(int sleep_time = 60);
+  public:
+    void watch(int sleep_time = 60);
 };
 
 #endif // PROJECT_WATCHER_H

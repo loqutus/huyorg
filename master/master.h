@@ -9,14 +9,15 @@
 #include <iostream>
 
 class master {
-  const std::string server_port;
-  const std::string server_host;
+    const std::string server_port;
+    const std::string server_host;
 
-public:
-  master();
-  ~master();
-  int listen();
-  std::string do_action(std::unordered_map<std::string, std::string> json_map);
+  public:
+    master();
+    ~master();
+    int listen();
+    std::string
+    do_action(std::unordered_map<std::string, std::string> json_map);
 };
 
 #endif // PROJECT_MASTER_H

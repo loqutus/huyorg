@@ -6,11 +6,11 @@
 #include <string>
 
 class read_file {
-  std::string file_str;
+    std::string file_str;
 
-public:
-  read_file(std::string filename);
-  std::string read();
+  public:
+    read_file(std::string filename);
+    std::string read();
 };
 
 #endif // PROJECT_READ_FILE_H

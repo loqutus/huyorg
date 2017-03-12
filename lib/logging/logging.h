@@ -9,15 +9,15 @@
 #include <time.h>
 
 class logging {
-  std::ofstream logfile;
+    std::ofstream logfile;
 
-public:
-  logging(std::string logfilename);
+  public:
+    logging(std::string logfilename);
 
-  ~logging();
+    ~logging();
 
-  int write(const char *left, std::string right = std::string(""));
-  int write(std::string left);
+    int write(const char *left, std::string right = std::string(""));
+    int write(std::string left);
 };
 
 extern logging log_obj;
