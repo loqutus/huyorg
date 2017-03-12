@@ -44,8 +44,8 @@ std::string httpclient::post() {
         headers.push_back("User-Agent: huyorg/0.0.1");
         headers.push_back("Accept: */*");
         headers.push_back("Accept-Encoding: gzip");
-        headers.push_back("Content-Type: text/plain");
-        headers.push_back("Content-Length: 0");
+        headers.push_back("Content-Type: application/json");
+        // headers.push_back("Content-Length: 0");
         headers.push_back("Connection: close");
         myRequest.setOpt(new curlpp::Options::HttpHeader(headers));
         myRequest.setOpt(new curlpp::options::PostFields(this->data));

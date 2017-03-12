@@ -3,6 +3,8 @@ machine:
     - docker
 dependencies:
   pre:
+    - ls /etc/apt/sources.list.d
+    - cat /etc/apt/sources.list
     - git clone https://github.com/google/googletest.git ; cd googletest/googletest/; mkdir build; cd build; cmake ..; make ; sudo make install
     - sudo apt-get install libboost-system libboost-program-options libboost-thread  socat
   override:
