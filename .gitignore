@@ -3,3 +3,4 @@ build/*
 *.swp
 *.log
 tags
+cmake-build-debug/*
