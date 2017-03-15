@@ -24,11 +24,11 @@ std::string httpclient::get() {
     }
 
     catch (curlpp::RuntimeError &e) {
-        return std::string("ERROR");
+        return std::string("RERROR");
     }
 
     catch (curlpp::LogicError &e) {
-        return std::string("ERROR");
+        return std::string("LERROR");
     }
 }
 
@@ -48,7 +48,7 @@ std::string httpclient::post() {
         // headers.push_back("Content-Length: 0");
         headers.push_back("Connection: close");
         myRequest.setOpt(new curlpp::Options::HttpHeader(headers));
-        myRequest.setOpt(new curlpp::options::PostFields(this->data));
+        myRequest.setOpt(new curlpp::options::PostFields(this->data.c_str()));
         myRequest.setOpt(
             new curlpp::options::PostFieldSize(this->data.length()));
         myRequest.perform();
@@ -58,10 +58,10 @@ std::string httpclient::post() {
     }
 
     catch (curlpp::RuntimeError &e) {
-        return std::string("ERROR");
+        return std::string(e.what());
     }
 
     catch (curlpp::LogicError &e) {
-        return std::string("ERROR");
+        return std::string(e.what());
     }
 }
