@@ -4,7 +4,6 @@
   with_items:
     - ntp
     - atop
-    - docker.io
     - docker-compose
     - libboost-program-options1.58.0
     - libboost-system1.58.0
@@ -14,14 +13,33 @@
     - strace
     - libcurlpp0
     - nload
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - software-properties-common
   tags: packages
 
-- name: ensure glusterfs is not installed
+- name: ensure packages is not installed
   apt: name={{item}} state=absent update_cache=yes
   with_items:
     - glusterfs-server
     - glusterfs-common
     - glusterfs-client
+    - docker.io
+
+- name: add docker apt key
+  apt_key: url=https://download.docker.com/linux/ubuntu/gpg state=present
+
+- name: add docker apt repository
+  apt_repository:
+    repo: deb [arch=armhf] https://download.docker.com/linux/ubuntu xenial stable
+    state: present
+
+- name: install docker package
+  apt: name=docker-ce state=installed
+
+- name: add user to docker group
+  user: name=rusik groups=docker
 
 - name: pi names in hosts
   lineinfile: dest=/etc/hosts line={{item}}
@@ -33,9 +51,6 @@
     - 10.0..0.5 pi5
   tags: hosts
 
-- name: DOCKER_HOST in bashrc
-  lineinfile: dest=/home/rusik/.bashrc line='export DOCKER_HOST="127.0.0.1:7777"'
- 
 - name: copy sudoers file
   copy: src=sudoers dest=/etc/sudoers force=yes mode=0440
   tags: sudoers
@@ -55,13 +70,13 @@
 - name: copy vimrc
   copy: src=vimrc dest=/home/rusik/.vimrc
 
-- name: copy docker defaults
-  copy: src=docker dest=/etc/default/docker
-  register: docker_file
+  #- name: copy docker defaults
+  #copy: src=docker dest=/etc/default/docker
+  #register: docker_file
 
-- name: restart docker on defaults file change
-  service: name=docker state=restarted
-  when: docker_file.changed
+  #- name: restart docker on defaults file change
+  #service: name=docker state=restarted
+  #when: docker_file.changed
 
 - name: copy burn.sh
   copy: src=burn.sh dest=/usr/local/bin/burn.sh mode=755 owner=root
