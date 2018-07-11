@@ -5,6 +5,7 @@
     - ntp
     - atop
     - docker.io
+    - docker-compose
     - libboost-program-options1.58.0
     - libboost-system1.58.0
     - libboost-thread1.58.0
@@ -15,31 +16,41 @@
     - nload
   tags: packages
 
+- name: ensure glusterfs is not installed
+  apt: name={{item}} state=absent update_cache=yes
+  with_items:
+    - glusterfs-server
+    - glusterfs-common
+    - glusterfs-client
+
 - name: pi names in hosts
   lineinfile: dest=/etc/hosts line={{item}}
   with_items:
-    - 192.168.0.1 pi1
-    - 192.168.0.2 pi2
-    - 192.168.0.3 pi3
-    - 192.168.0.4 pi4
-    - 192.168.0.5 pi5
+    - 10.0.0.1 pi1
+    - 10.0.0.2 pi2
+    - 10.0.0.3 pi3
+    - 10.0.0.4 pi4
+    - 10.0..0.5 pi5
   tags: hosts
 
+- name: DOCKER_HOST in bashrc
+  lineinfile: dest=/home/rusik/.bashrc line='export DOCKER_HOST="127.0.0.1:7777"'
+ 
 - name: copy sudoers file
   copy: src=sudoers dest=/etc/sudoers force=yes mode=0440
   tags: sudoers
 
-- name: remove swap file
-  lineinfile: dest=/etc/fstab state=absent line='/var/swap none swap sw 0 0'
-  register: swap_fstab
+  #- name: remove swap file
+  #  lineinfile: dest=/etc/fstab state=absent line='/var/swap none swap sw 0 0'
+  #register: swap_fstab
 
-- name: disable swap
-  shell: swapoff -a
-  when: swap_fstab.changed
+  #- name: disable swap
+  # shell: swapoff -a
+  #when: swap_fstab.changed
 
-- name: rm swap
-  file: dest=/var/swap state=absent force=yes
-  when: swap_fstab.changed
+  #- name: rm swap
+  #file: dest=/var/swap state=absent force=yes
+  #when: swap_fstab.changed
 
 - name: copy vimrc
   copy: src=vimrc dest=/home/rusik/.vimrc
@@ -66,6 +77,3 @@
   service: name=ssh state=restarted
   when: sshd_config.changed
 
-- name: docker bash alias
-  lineinfile: path=/home/rusik/.bashrc line='alias docker="docker -H 127.0.0.1:7777 "'
-  
