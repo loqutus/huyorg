@@ -35,8 +35,19 @@
     repo: deb [arch=armhf] https://download.docker.com/linux/ubuntu xenial stable
     state: present
 
+- name: add kubernetes apt key
+  apt_key: url=https://packages.cloud.google.com/apt/doc/apt-key.gpg state=present
+
+- name: add kubernetes repository
+  apt_repository:
+    repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+    state: present
+      
 - name: install docker package
   apt: name=docker-ce state=installed
+
+- name: install kubeadm
+  apt: name=kubeadm state=installed
 
 - name: add user to docker group
   user: name=rusik groups=docker
